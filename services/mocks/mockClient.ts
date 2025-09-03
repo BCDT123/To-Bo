@@ -1,5 +1,4 @@
-
-import mockData from './mockData';
+import mockData from "./mockData";
 
 export async function mockClient<T>(endpoint: string): Promise<T> {
   return new Promise((resolve) => {
