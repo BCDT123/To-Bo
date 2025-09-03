@@ -1,0 +1,83 @@
+{
+  "greetings": {
+    "greeting1": "Hello, Brenda"
+  },
+  "common": {
+    "ok": "OK",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "yes": "Yes",
+    "no": "No",
+    "close": "Close",
+    "save": "Save",
+    "edit": "Edit",
+    "delete": "Delete",
+    "loading": "Loading...",
+    "error": "Something went wrong"
+  },
+  "auth": {
+    "login": "Log in",
+    "logout": "Log out",
+    "signup": "Sign up",
+    "email": "Email address",
+    "password": "Password",
+    "rememberMe": "Remember me",
+    "forgotPassword": "Forgot your password?",
+    "resetPassword": "Reset password",
+    "loginSuccess": "Welcome back!",
+    "loginError": "Invalid email or password"
+  },
+  "navbar": {
+    "home": "Home",
+    "dashboard": "Dashboard",
+    "profile": "Profile",
+    "settings": "Settings",
+    "notifications": "Notifications",
+    "language": "Language"
+  },
+  "dashboard": {
+    "welcome": "Welcome, Brenda!",
+    "overview": "Overview",
+    "stats": "Statistics",
+    "activity": "Recent activity",
+    "tasks": "Your tasks",
+    "messages": "Messages"
+  },
+  "profile": {
+    "title": "Your Profile",
+    "name": "Full name",
+    "email": "Email",
+    "phone": "Phone number",
+    "update": "Update profile",
+    "changePassword": "Change password",
+    "success": "Profile updated successfully"
+  },
+  "settings": {
+    "title": "Settings",
+    "theme": "Theme",
+    "darkMode": "Dark mode",
+    "notifications": "Notifications",
+    "language": "Language preference",
+    "privacy": "Privacy settings"
+  },
+  "errors": {
+    "required": "This field is required",
+    "invalidEmail": "Please enter a valid email",
+    "minLength": "Minimum length is {{min}} characters",
+    "maxLength": "Maximum length is {{max}} characters",
+    "network": "Network error. Please try again later",
+    "unauthorized": "You are not authorized to access this resource"
+  },
+  "notifications": {
+    "newMessage": "You have a new message",
+    "taskCompleted": "Task completed successfully",
+    "updateAvailable": "An update is available",
+    "sessionExpired": "Your session has expired. Please log in again"
+  },
+  "form": {
+    "submit": "Submit",
+    "reset": "Reset",
+    "requiredField": "* Required field",
+    "validationError": "Please fix the errors above"
+  }
+}

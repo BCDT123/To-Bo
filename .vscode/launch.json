@@ -1,0 +1,24 @@
+{
+    "configurations": [
+        {
+      "type": "node",
+      "request": "launch",
+      "name": "Start Dev Server",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev"],
+      "console": "integratedTerminal"
+    },
+        {
+            "type": "chrome",
+            "name": "Start Debug Session",
+            "request": "launch",
+            "url": "http://localhost:3000/"
+        }
+    ],
+  "compounds": [
+    {
+      "name": "Run & Debug",
+      "configurations": ["Start Dev Server", "Start Debug Session"]
+    }
+  ]
+}

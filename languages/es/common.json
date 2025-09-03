@@ -1,0 +1,15 @@
+{
+  "common": {
+    "ok": "Aceptar",
+    "cancel": "Cancelar",
+    "confirm": "Confirmar",
+    "yes": "Sí",
+    "no": "No",
+    "close": "Cerrar",
+    "save": "Guardar",
+    "edit": "Editar",
+    "delete": "Eliminar",
+    "loading": "Cargando...",
+    "error": "Algo salió mal"
+  }
+}
