@@ -1,7 +1,7 @@
 // src/app/page.tsx (o cualquier componente)
 "use client";
 import { useEffect, useState } from "react";
-import { apiService } from "@/services/api";
+import { apiService } from "@/services/firestore";
 import { useTranslations } from "next-intl";
 
 export default function HelloPage() {
