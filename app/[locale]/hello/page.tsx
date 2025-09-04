@@ -1,7 +1,7 @@
 // src/app/page.tsx (o cualquier componente)
 "use client";
 import { useEffect, useState } from "react";
-import { apiService } from "@/services/firestore";
+import { userService } from "@/services/services/userService";
 import { useTranslations } from "next-intl";
 
 export default function HelloPage() {
@@ -9,7 +9,7 @@ export default function HelloPage() {
 
   const [users, setUsers] = useState<any[]>([]);
   useEffect(() => {
-    apiService.getUsers().then(setUsers).catch(console.error);
+    userService.getUsers().then(setUsers).catch(console.error);
   }, []);
 
   return (
