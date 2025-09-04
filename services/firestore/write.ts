@@ -1,28 +1,33 @@
 import {
   collection,
   addDoc,
+  setDoc,
   updateDoc,
   deleteDoc,
   doc,
+  serverTimestamp,
 } from "firebase/firestore";
 import { firestore } from "@/firebaseConfig";
-
-// const newBaby = {
-//   name: "Luna",
-//   birth_date: "2025-08-15",
-//   gender: "female",
-//   created_at: new Date().toISOString(),
-// };
 
 // const babyId = await addToCollection("babies", newBaby);
 
 export async function addToCollection<T extends object>(
   collectionName: string,
-  data: T
+  data: T,
+  customId?: string // nuevo parámetro opcional
 ): Promise<string | null> {
   try {
     const ref = collection(firestore, collectionName);
-    const docRef = await addDoc(ref, data);
+    const docRef = customId ? doc(ref, customId) : doc(ref); // usa el ID si lo pasas
+
+    const enrichedData = {
+      ...data,
+      id: docRef.id,
+      createdAt: serverTimestamp(),
+      updatedAt: serverTimestamp(),
+    };
+
+    await setDoc(docRef, enrichedData);
     return docRef.id;
   } catch (e) {
     console.error(`Error adding to ${collectionName}:`, e);

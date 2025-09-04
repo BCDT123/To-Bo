@@ -2,6 +2,12 @@ import { initializeApp } from "firebase/app";
 import { getDatabase } from "firebase/database"; // Para Realtime Database
 import { getFirestore } from "firebase/firestore"; // Para Firestore
 import { getAnalytics } from "firebase/analytics";
+import {
+  getAuth,
+  GoogleAuthProvider,
+  signInWithPopup,
+  signOut,
+} from "firebase/auth";
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -15,6 +21,10 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 //const analytics = getAnalytics(app);
+const auth = getAuth(app);
+const provider = new GoogleAuthProvider();
+
+export { auth, provider, signInWithPopup, signOut };
 
 // Exporta según la base de datos que uses
 export const dataBase = getDatabase(app); // Realtime Database

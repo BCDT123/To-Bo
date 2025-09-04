@@ -26,7 +26,7 @@ export const userService = {
   addUser: (data: User) =>
     useMock
       ? firestoreMock.addToCollection(endpoints.users, data)
-      : addToCollection(endpoints.users, data),
+      : addToCollection(endpoints.users, data, data.id),
 
   updateUser: (id: string, data: Partial<User>) =>
     useMock
