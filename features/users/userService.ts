@@ -10,7 +10,7 @@ import {
   deleteDocument,
 } from "@/services/firestore/firestore";
 
-import { User } from "@/types/models";
+import { User } from "@/features/users/userModel";
 
 export const userService = {
   getUsers: () =>

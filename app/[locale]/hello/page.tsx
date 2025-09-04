@@ -1,7 +1,7 @@
 // src/app/page.tsx (o cualquier componente)
 "use client";
 import { useEffect, useState } from "react";
-import { userService } from "@/services/services/userService";
+import { userService } from "@/features/users/userService";
 import { useTranslations } from "next-intl";
 
 export default function HelloPage() {
