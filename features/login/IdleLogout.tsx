@@ -5,14 +5,22 @@ import { signOut } from "firebase/auth"; // Cliente: cierra sesión desde el nav
 import { auth } from "@/firebaseConfig"; // Cliente: instancia de Firebase
 import { useState, useEffect } from "react"; // Cliente: hooks de React
 import { useTranslations } from "next-intl"; // Cliente: hook de traducciones
-import IdleModal from "./IdleModal";
+import IdleModal from "@/features/login/IdleModal";
+import { useRouter } from "next/navigation";
+
+//detectar inactividad del usuario y cerrar su sesión automáticamente tras un tiempo.
 
 export default function IdleLogout() {
-  const user = useUser(); // hook siempre se llama
-  const [showPrompt, setShowPrompt] = useState(false); // hook siempre se llama
-  const [countdown, setCountdown] = useState(10); // segundos antes de cerrar sesión
+  const user = useUser(); // Obtiene el usuario actual. Si no hay usuario, no se renderiza nada.
+  const [showPrompt, setShowPrompt] = useState(false); // controla si se muestra el modal.
+  const [countdown, setCountdown] = useState(10); // cuenta regresiva antes de cerrar sesión.
+  // Traducciones para textos del modal.
   const tAuth = useTranslations("auth");
   const tCommon = useTranslations("common");
+
+  const router = useRouter();
+
+  // Funciones de control
 
   const handleIdle = () => {
     if (user) setShowPrompt(true);
@@ -34,6 +42,8 @@ export default function IdleLogout() {
     debounce: 500,
   });
 
+  // Efecto para cuenta regresiva
+
   useEffect(() => {
     let timer: NodeJS.Timeout;
 
@@ -53,10 +63,13 @@ export default function IdleLogout() {
     }
 
     return () => clearInterval(timer);
-  }, [showPrompt]);
+  }, [showPrompt]); // se ejecuta cada que showPrompt Cambia
 
-  // ahora sí podés condicionar el render
-  if (!user) return null;
+  // condicionar el render
+  if (!user) {
+    router.push("/"); //redireccionamos a main
+    return null;
+  }
 
   return (
     <>

@@ -3,8 +3,8 @@
 import { useEffect, useState } from "react";
 import { userService } from "@/features/users/userService";
 import { useTranslations } from "next-intl";
-import Login from "@/components/Login";
-import LogoutButton from "@/components/LoginOut";
+import Login from "@/features/login/Login";
+import LogoutButton from "@/features/login/LoginOut";
 import { auth } from "@/firebaseConfig";
 import { onAuthStateChanged } from "firebase/auth";
 

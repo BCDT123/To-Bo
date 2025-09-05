@@ -1,24 +1,13 @@
-import HeaderHome from "./Header";
-import ProtectedLayout from "@/components/ProtectLayout";
+import HeaderHome from "@/features/home/Header";
+import ProtectedLayout from "@/features/login/ProtectLayout";
 
 export default function Home() {
   return (
-    <ProtectedLayout>
+    //<ProtectedLayout>
+    <section className="md:pt-10">
       <HeaderHome />
-    </ProtectedLayout>
+    </section>
+
+    //</ProtectedLayout>
   );
-
-  {
-    /* <HelloPage /> */
-  }
-  {
-    /* <div className="card">
-        <h2 className="text-xl font-bold">Hola,👋</h2>
-        <p>Esta web cambia según el tema.</p>
-      </div> */
-  }
-
-  {
-    /* <div>{user ? <p>Bienvenido, {user.displayName}</p> : <Login />}</div> */
-  }
 }

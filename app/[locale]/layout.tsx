@@ -4,7 +4,10 @@ import "@/app/globals.css";
 import { NextIntlClientProvider } from "next-intl";
 import { loadLanguage } from "@/lib/loadLanguages";
 import { UserProvider } from "@/features/users/userContext";
-import IdleLogout from "@/components/IdleLogout";
+import IdleLogout from "@/features/login/IdleLogout";
+import NavigationWrapper from "@/components/nav/NavigationWrapper";
+import ProtectedLayout from "@/features/login/ProtectLayout";
+import SessionGate from "@/features/login/SessionGate";
 
 const poppins = Poppins({
   variable: "--font-poppins",
@@ -64,7 +67,10 @@ export default async function LocaleLayout({
         <NextIntlClientProvider locale={params.locale} messages={language}>
           <UserProvider>
             <IdleLogout />
-            {children}
+            <SessionGate>
+              <NavigationWrapper />
+              {children}
+            </SessionGate>
           </UserProvider>
         </NextIntlClientProvider>
       </body>

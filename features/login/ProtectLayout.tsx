@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { auth } from "@/firebaseConfig";
 import type { User } from "firebase/auth";
+import NavigationWrapper from "@/components/nav/NavigationWrapper";
 
 export default function ProtectedLayout({
   children,
@@ -24,12 +25,22 @@ export default function ProtectedLayout({
   }, [router]); //Usar router porque se usa router.push() o router.replace() dentro del efecto.
 
   if (user === undefined) {
-    return <p className="text-center mt-10">Verificando sesión...</p>;
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <div className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-blue-500" />
+      </div>
+    );
+    //return <p className="text-center mt-10">Verificando sesión...</p>;
   }
 
   if (user === null) {
     return null; // ya redirigió
   }
 
-  return <>{children}</>;
+  return (
+    <>
+      <NavigationWrapper />
+      {children}
+    </>
+  );
 }

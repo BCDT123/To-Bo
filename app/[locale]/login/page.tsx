@@ -4,8 +4,8 @@ import { useTranslations } from "next-intl";
 
 //Components
 import Image from "next/image";
-import Login from "@/components/Login";
-import LogoutButton from "@/components/LoginOut";
+import Login from "@/features/login/Login";
+import LogoutButton from "@/features/login/LoginOut";
 import InputWithIcon from "@/components/Input";
 import Button from "@/components/Button";
 import Divider from "@/components/Divider";
@@ -22,9 +22,9 @@ export default function LoginPage() {
     <section className="flex flex-col gap-6 justify-center items-center w-xs sm:w-sm lg:w-md h-screen mx-auto my-auto">
       <div>
         <Image
+          priority={false}
           src={letter}
           width={300}
-          height={300}
           alt="Picture of the author"
         />
       </div>
