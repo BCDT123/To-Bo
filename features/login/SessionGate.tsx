@@ -1,5 +1,5 @@
 "use client";
-
+import React from "react";
 import { useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { auth } from "@/firebaseConfig";
@@ -37,6 +37,7 @@ export default function SessionGate({
 
         <div className="flex justify-center items-center w-screen">
           <AiOutlineLoading3Quarters
+            role="status"
             size={50}
             className="animate-spin text-thistle "
           />

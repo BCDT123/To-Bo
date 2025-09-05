@@ -1,3 +1,4 @@
+import React from "react";
 import NavItem from "./NavItem";
 
 //icons
@@ -13,36 +14,39 @@ interface NavBarProps {
 
 export default function NavigationBar({ pathname }: NavBarProps) {
   return (
-    <nav className="fixed w-full  h-10  bg-white shadow-sm z-50 bottom-0 md:top-0 md:bottom-auto flex justify-around py-2">
+    <nav
+      role="navigation"
+      className="fixed w-full  h-10  bg-white shadow-sm z-50 bottom-0 md:top-0 md:bottom-auto flex justify-around py-2"
+    >
       <NavItem
         href="/"
-        //label="Home"
+        label="Home"
         icon={<AiFillHome className="h-6 w-6" />}
         isActive={/^\/[a-z]{2}$/.test(pathname)}
       />
       <NavItem
         href="/feed"
-        //label="Feed"
+        label="Feed"
         icon={<BiNews className="h-6 w-6" />}
-        isActive={pathname.endsWith(`/${"/feed"}`)}
+        isActive={pathname.endsWith("/feed")}
       />
       <NavItem
         href="/add"
-        // label="Add"
+        label="Add"
         icon={<RiAddBoxLine className="h-6 w-6" />}
-        isActive={pathname.endsWith(`/${"/add"}`)}
+        isActive={pathname.endsWith("/add")}
       />
       <NavItem
         href="/alert"
-        //label="Alert"
+        label="Alert"
         icon={<FaRegBell className="h-6 w-6" />}
-        isActive={pathname.endsWith(`/${"/alert"}`)}
+        isActive={pathname.endsWith("/alert")}
       />
       <NavItem
         href="/user"
-        //label="User"
+        label="User"
         icon={<FiUser className="h-6 w-6" />}
-        isActive={pathname.endsWith(`/${"/user"}`)}
+        isActive={pathname.endsWith("/user")}
       />
     </nav>
   );

@@ -7,6 +7,11 @@ module.exports = {
     "^.+\\.(js|jsx|ts|tsx)$": ["@swc/jest"],
   },
   moduleNameMapper: {
+    "^@/(.*)$": "<rootDir>/$1",
     "\\.(css|less|scss|sass)$": "identity-obj-proxy",
   },
+
+  // moduleNameMapper: {
+  //   "\\.(css|less|scss|sass)$": "identity-obj-proxy",
+  // },
 };

@@ -1,5 +1,5 @@
-// components/Login.js
 "use client";
+import React from "react";
 import { loginWithPopup } from "@/features/users/auth";
 import { useTranslations } from "next-intl";
 import Button from "@/components/Button";

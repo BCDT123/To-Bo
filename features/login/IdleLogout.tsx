@@ -1,4 +1,5 @@
 "use client";
+import React from "react";
 import { useUser } from "@/features/users/userContext"; // Hook personalizado, cliente
 import { useIdleTimer } from "react-idle-timer"; // Cliente: detecta actividad del usuario
 import { signOut } from "firebase/auth"; // Cliente: cierra sesión desde el navegador
