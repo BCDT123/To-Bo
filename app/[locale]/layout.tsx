@@ -1,26 +1,24 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Poppins } from "next/font/google";
 import "@/app/globals.css";
 import { NextIntlClientProvider } from "next-intl";
 import { loadLanguage } from "@/lib/loadLanguages";
+import { UserProvider } from "@/features/users/userContext";
+import IdleLogout from "@/components/IdleLogout";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const poppins = Poppins({
+  variable: "--font-poppins",
+  weight: ["300"],
   subsets: ["latin"],
   display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "Title App",
-  description: "Desc App",
+  title: "Today Baby Tracker",
+  description: "Track your baby's daily activities with ease",
   openGraph: {
-    title: "Title App",
-    description: "Desc App",
+    title: "Today Baby Tracker",
+    description: "Track your baby's daily activities with ease",
     url: "https://misitio.com",
     images: [
       {
@@ -60,10 +58,14 @@ export default async function LocaleLayout({
         <link rel="manifest" href="/favicon/site.webmanifest" />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        suppressHydrationWarning
+        className={`${poppins.variable} antialiased`}
       >
         <NextIntlClientProvider locale={params.locale} messages={language}>
-          {children}
+          <UserProvider>
+            <IdleLogout />
+            {children}
+          </UserProvider>
         </NextIntlClientProvider>
       </body>
     </html>

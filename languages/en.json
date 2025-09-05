@@ -13,7 +13,8 @@
     "edit": "Edit",
     "delete": "Delete",
     "loading": "Loading...",
-    "error": "Something went wrong"
+    "error": "Something went wrong",
+    "continue": "Continue"
   },
   "auth": {
     "login": "Log in",
@@ -25,7 +26,8 @@
     "forgotPassword": "Forgot your password?",
     "resetPassword": "Reset password",
     "loginSuccess": "Welcome back!",
-    "loginError": "Invalid email or password"
+    "loginError": "Invalid email or password",
+    "createAccount": "Create an Account"
   },
   "navbar": {
     "home": "Home",

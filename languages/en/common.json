@@ -10,6 +10,9 @@
     "edit": "Edit",
     "delete": "Delete",
     "loading": "Loading...",
-    "error": "Something went wrong"
+    "error": "Something went wrong",
+    "continue": "Continue",
+    "or": "or",
+    "seconds": "seconds"
   }
 }
