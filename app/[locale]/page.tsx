@@ -4,7 +4,7 @@ import ProtectedLayout from "@/features/login/ProtectLayout";
 export default function Home() {
   return (
     //<ProtectedLayout>
-    <section className="md:pt-10">
+    <section className="md:pt-16">
       <HeaderHome />
     </section>
 

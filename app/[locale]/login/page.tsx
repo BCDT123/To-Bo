@@ -12,7 +12,7 @@ import Divider from "@/components/Divider";
 
 //icons
 import { MdEmail } from "react-icons/md";
-import letter from "@/public/favicon/letter.png";
+import letterImg from "@/public/favicon/letter.png";
 
 export default function LoginPage() {
   const tAuth = useTranslations("auth");
@@ -21,12 +21,7 @@ export default function LoginPage() {
   return (
     <section className="flex flex-col gap-6 justify-center items-center w-xs sm:w-sm lg:w-md h-screen mx-auto my-auto">
       <div>
-        <Image
-          priority={false}
-          src={letter}
-          width={300}
-          alt="Picture of the author"
-        />
+        <Image priority={false} src={letterImg} width={300} alt="Logo" />
       </div>
 
       <div className="flex flex-col justify-center text-center">

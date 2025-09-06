@@ -15,22 +15,22 @@ export const loginWithPopup = async () => {
       const newUser: User = {
         id: user.uid,
         email: user.email || "",
-        name: user.displayName || "Sin nombre",
+        name: user.displayName || "Unknown",
         admin: false,
         photoUrl: user.photoURL || "",
-        language: navigator.language || "es",
+        language: navigator.language || "en",
         createdAt: serverTimestamp(), // mejor que new Date()
       };
 
       await userService.addUser(newUser); // usa el UID como ID
-      console.log("Usuario creado en Firestore");
+      console.log("User created in Firestore");
     } else {
-      console.log("Usuario ya existe en Firestore");
+      console.log("User exist in Firestore");
     }
 
     return user; // opcional: puedes devolver el usuario
   } catch (error) {
-    console.error("Error al iniciar sesión:", error);
+    console.error("Error log in:", error);
     throw error;
   }
 };
@@ -38,9 +38,9 @@ export const loginWithPopup = async () => {
 export const logout = async () => {
   try {
     await signOut(auth);
-    console.log("Sesión cerrada correctamente");
+    console.log("Session close", auth);
     // Opcional: redirige al usuario o limpia el estado
   } catch (error) {
-    console.error("Error al cerrar sesión:", error);
+    console.error("Error close session:", error);
   }
 };

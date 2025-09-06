@@ -1,3 +1,4 @@
+// models DataBase
 type DiaperType = "pee" | "poo" | "mix";
 type Consistency = "dry" | "wet";
 type PooColor = "yellow" | "green" | "brown" | "black";

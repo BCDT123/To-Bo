@@ -13,10 +13,10 @@ export default function Login() {
   const handleLogin = async () => {
     try {
       const user = await loginWithPopup();
-      console.log("Usuario:", user);
+      console.log("User:", user);
       router.push("/");
     } catch (error) {
-      console.error("Error al iniciar sesión:", error);
+      console.error("Error Log in:", error);
     }
   };
 

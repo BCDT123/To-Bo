@@ -38,7 +38,7 @@ export default function IdleLogout() {
   };
 
   const { reset } = useIdleTimer({
-    timeout: 1000 * 60 * 1,
+    timeout: 1000 * 60 * 100, // configuracion de tiempo para deslogear
     onIdle: handleIdle,
     debounce: 500,
   });

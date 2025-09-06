@@ -33,8 +33,6 @@ export default function SessionGate({
   if (user === undefined) {
     return (
       <div className="flex items-center justify-center h-screen bg-white">
-        {/* <div className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-blue-500" /> */}
-
         <div className="flex justify-center items-center w-screen">
           <AiOutlineLoading3Quarters
             role="status"
@@ -44,6 +42,11 @@ export default function SessionGate({
         </div>
       </div>
     );
+  }
+
+  if (user === null && !isPublicRoute) {
+    router.replace("/login");
+    return null;
   }
 
   // Si es ruta pública, renderiza aunque no haya usuario
