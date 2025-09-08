@@ -4,13 +4,15 @@ type ButtonProps = {
   children: ReactNode;
   onClick?: () => void;
   isActive?: boolean;
-  label: string;
+  label?: string;
+  disabled?: boolean;
 };
 
-export default function Button({ children, onClick }: ButtonProps) {
+export default function Button({ children, onClick, disabled }: ButtonProps) {
   return (
     <button
       onClick={onClick}
+      disabled={disabled}
       className="flex flex-row justify-center items-center gap-2 rounded-lg cursor-pointer text-white bg-thistle tracking-widest uppercase px-4 py-3 
       hover:bg-thistle/90 transition-transform duration-300 ease-in-out transform hover:scale-115"
     >

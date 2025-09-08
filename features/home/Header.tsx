@@ -10,7 +10,7 @@ export default function HeaderHome() {
 
   return (
     <div>
-      <h1>Bienvenido, {user?.displayName}</h1>
+      <h1>Bienvenido, {user?.email}</h1>
     </div>
   );
 }

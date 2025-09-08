@@ -6,12 +6,11 @@ import { loadLanguage } from "@/lib/loadLanguages";
 import { UserProvider } from "@/features/users/userContext";
 import IdleLogout from "@/features/login/IdleLogout";
 import NavigationWrapper from "@/components/nav/NavigationWrapper";
-import ProtectedLayout from "@/features/login/ProtectLayout";
 import SessionGate from "@/features/login/SessionGate";
 
 const poppins = Poppins({
   variable: "--font-poppins",
-  weight: ["300"],
+  weight: ["300", "400", "500", "700"],
   subsets: ["latin"],
   display: "swap",
 });
@@ -45,6 +44,8 @@ export default async function LocaleLayout({
   return (
     <html lang={params.locale}>
       <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        {/* <meta name="theme-color" content="#ffffff" /> */}
         <link
           rel="icon"
           type="image/png"

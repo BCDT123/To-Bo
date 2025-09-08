@@ -1,3 +1,5 @@
+import { Timestamp, FieldValue } from "firebase/firestore";
+
 // models DataBase
 type DiaperType = "pee" | "poo" | "mix";
 type Consistency = "dry" | "wet";
@@ -13,8 +15,8 @@ export interface User {
   admin: boolean;
   photoUrl: string;
   language: string;
-  createdAt: Date;
-  updatedAt?: Date;
+  createdAt: Date | FieldValue;
+  updatedAt?: Timestamp;
 }
 
 export interface Baby {

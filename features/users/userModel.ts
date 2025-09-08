@@ -1,3 +1,4 @@
+import { Timestamp, FieldValue } from "firebase/firestore";
 // Elimina password si usas Firebase Auth
 export interface User {
   id: string;
@@ -7,6 +8,6 @@ export interface User {
   admin: boolean;
   photoUrl: string;
   language: string;
-  createdAt: Date;
+  createdAt: FieldValue | Date;
   updatedAt?: Date;
 }

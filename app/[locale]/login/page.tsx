@@ -1,18 +1,15 @@
-// src/app/page.tsx (o cualquier componente)
 "use client";
+
 import { useTranslations } from "next-intl";
 
 //Components
 import Image from "next/image";
-import Login from "@/features/login/Login";
-import LogoutButton from "@/features/login/LoginOut";
-import InputWithIcon from "@/components/Input";
-import Button from "@/components/Button";
 import Divider from "@/components/Divider";
 
 //icons
-import { MdEmail } from "react-icons/md";
 import letterImg from "@/public/favicon/letter.png";
+import LoginGoogle from "@/features/login/LoginGoogle";
+import LoginMail from "@/features/login/LoginMail";
 
 export default function LoginPage() {
   const tAuth = useTranslations("auth");
@@ -29,24 +26,16 @@ export default function LoginPage() {
         <h2>{tAuth("addEmailMsg")}</h2>
       </div>
       <div className="flex flex-col gap-2 w-full">
-        <InputWithIcon
-          icon={<MdEmail />}
-          type="email"
-          placeholder="example@email.com"
-        ></InputWithIcon>
-
-        <Button>{tCommon("continue")}</Button>
+        {/* email login */}
+        <LoginMail />
       </div>
       <div className=" w-full">
         <Divider text={tCommon("or")} />
       </div>
       <div className="flex flex-col w-full">
-        <Login />
+        {/* google login */}
+        <LoginGoogle />
       </div>
-
-      {/* <div>
-        <LogoutButton />
-      </div> */}
     </section>
   );
 }

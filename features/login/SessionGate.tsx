@@ -30,6 +30,12 @@ export default function SessionGate({
     return () => unsubscribe();
   }, [router, isPublicRoute]);
 
+  useEffect(() => {
+    if (user && pathname.endsWith("/login")) {
+      router.replace("/"); // Redirige a home
+    }
+  }, [user, pathname, router]);
+
   if (user === undefined) {
     return (
       <div className="flex items-center justify-center h-screen bg-white">

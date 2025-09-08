@@ -1,0 +1,18 @@
+import React from "react";
+
+interface ErrorMessageProps {
+  message: string;
+  className?: string;
+}
+
+export default function ErrorMessage({
+  message,
+  className = "",
+}: ErrorMessageProps) {
+  if (!message) return null;
+  return (
+    <p className={`text-red-500 mt-2 ${className}`} role="alert">
+      {message}
+    </p>
+  );
+}
