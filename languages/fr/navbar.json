@@ -1,0 +1,12 @@
+{
+  "navbar": {
+    "home": "Home",
+    "feed": "Feed",
+    "add": "Add",
+    "alert": "Alert",
+    "user": "User",
+    "profile": "Profile",
+    "settings": "Settings",
+    "logout": "Log out"
+  }
+}

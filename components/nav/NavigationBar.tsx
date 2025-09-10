@@ -11,46 +11,48 @@ import letterImg from "@/public/favicon/letter.png";
 
 import { NavItemData } from "@/types/props";
 import { logout } from "@/features/users/auth";
+import { useTranslations } from "next-intl";
 
 interface NavBarProps {
   pathname: string;
 }
 
 export default function NavigationBar({ pathname }: NavBarProps) {
+  const tNavbar = useTranslations("navbar");
   //generando data de menu
   const navItems: NavItemData[] = [
     {
-      label: "Home",
+      label: tNavbar("home"),
       href: "/",
       isActive: /^\/[a-z]{2}$/.test(pathname),
       icon: <AiFillHome className="h-5 w-5" />,
     },
     {
       href: "/feed",
-      label: "Feed",
+      label: tNavbar("feed"),
       icon: <BiNews className="h-5 w-5" />,
       isActive: pathname.endsWith("/feed"),
     },
     {
       href: "/add",
-      label: "Add",
+      label: tNavbar("add"),
       icon: <RiAddBoxLine className="h-5 w-5" />,
       isActive: pathname.endsWith("/add"),
     },
     {
       href: "/alert",
-      label: "Alert",
+      label: tNavbar("alert"),
       icon: <FaRegBell className="h-5 w-5" />,
       isActive: pathname.endsWith("/alert"),
     },
     {
-      label: "User",
+      label: tNavbar("user"),
       href: "/user",
       icon: <FiUser className="h-5 w-5" />,
       submenu: [
-        { label: "Perfil", href: "/user/profile" },
-        { label: "Configuración", href: "/user/settings" },
-        { label: "Cerrar sesión", onClick: logout },
+        { label: tNavbar("profile"), href: "/user/profile" },
+        { label: tNavbar("settings"), href: "/user/settings" },
+        { label: tNavbar("logout"), onClick: logout },
       ],
     },
   ];

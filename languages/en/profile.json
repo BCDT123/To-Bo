@@ -1,0 +1,22 @@
+{
+  "profile": {
+    "title": "Your Profile",
+    "name": "Full name",
+    "email": "Email",
+    "phone": "Phone number",
+    "update": "Update profile",
+    "changePassword": "Change password",
+    "success": "Profile updated successfully",
+    "error": "An error occurred while updating the profile",
+    "editProfile": "Edit Profile",
+    "language": "Language",
+    "photo": "Profile Photo",
+    "uploadPhoto": "Upload Photo",
+    "removePhoto": "Remove Photo",
+    "nameRequired": "Name is required",
+    "invalidEmail": "Invalid email address",
+    "nameTooShort": "Name is too short",
+    "loadingUser": "Loading user...",
+    "noUser": "No user logged in."
+  }
+}

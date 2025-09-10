@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { loginWithPopup } from "@/features/users/auth";
 import Button from "@/components/Button";
 import ErrorMessage from "@/components/ErrorMessage";
+import { useUser, useSetUser } from "@/features/users/userContext";
 //Translations
 import { useTranslations } from "next-intl";
 
@@ -17,12 +18,14 @@ export default function LoginGoogle() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const setUser = useSetUser(); // <-- Obtén la función aquí
 
   const handleLogin = async () => {
     setLoading(true);
     setError("");
     try {
       const user = await loginWithPopup();
+      setUser(user);
       if (user) {
         router.push("/");
       } else {

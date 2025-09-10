@@ -3,8 +3,9 @@ import React, { useState } from "react";
 //components
 import InputWithIcon from "@/components/Input";
 import Button from "@/components/Button";
-import { signInWithEmail } from "@/features/users/auth";
+import { signInWithEmail } from "@/features/login/auth";
 import ErrorMessage from "@/components/ErrorMessage";
+import { useUser, useSetUser } from "@/features/users/userContext";
 
 //translations
 import { useTranslations } from "next-intl";
@@ -20,6 +21,7 @@ export default function LoginMail() {
 
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const setUser = useSetUser(); // <-- Obtén la función aquí
 
   const handleContinue = async () => {
     if (!email.includes("@")) {
@@ -33,7 +35,8 @@ export default function LoginMail() {
     setLoading(true);
     setError("");
     try {
-      await signInWithEmail(email, password);
+      const updatedUser = await signInWithEmail(email, password);
+      setUser(updatedUser);
     } catch (err: any) {
       setError(err.message || "An unexpected error occurred.");
     } finally {

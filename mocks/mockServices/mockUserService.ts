@@ -28,7 +28,7 @@ export const firestoreMock = {
     Promise.resolve("mock-id"),
 
   updateDocument: (_endpoint: string, _id: string, _data: any) =>
-    Promise.resolve(true),
+    Promise.resolve(_data),
 
   deleteDocument: (_endpoint: string, _id: string) => Promise.resolve(true),
 };

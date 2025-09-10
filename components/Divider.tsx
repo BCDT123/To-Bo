@@ -11,3 +11,10 @@ export default function Divider({ text }: DividerProps) {
     </div>
   );
 }
+export function DividerLine() {
+  return (
+    <div className="flex items-center">
+      <div className="flex-grow h-px bg-gray-300" />
+    </div>
+  );
+}
