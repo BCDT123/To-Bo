@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 //components
-import { loginWithPopup } from "@/features/users/auth";
+import { loginWithPopup } from "@/features/login/auth";
 import Button from "@/components/Button";
 import ErrorMessage from "@/components/ErrorMessage";
 import { useUser, useSetUser } from "@/features/users/userContext";

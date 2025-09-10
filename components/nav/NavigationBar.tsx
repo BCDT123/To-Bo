@@ -10,7 +10,7 @@ import { FaRegBell } from "react-icons/fa";
 import letterImg from "@/public/favicon/letter.png";
 
 import { NavItemData } from "@/types/props";
-import { logout } from "@/features/users/auth";
+import { logout } from "@/features/login/auth";
 import { useTranslations } from "next-intl";
 
 interface NavBarProps {
