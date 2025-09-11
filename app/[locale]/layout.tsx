@@ -15,6 +15,17 @@ const poppins = Poppins({
   display: "swap",
 });
 
+/**
+ * Metadata for the application.
+ *
+ * Purpose:
+ * - Defines SEO and Open Graph metadata for the app.
+ * - Improves discoverability and sharing on social platforms.
+ *
+ * Advantages:
+ * - Centralizes metadata configuration.
+ * - Ensures consistent branding and description across pages.
+ */
 export const metadata: Metadata = {
   title: "Today Baby Tracker",
   description: "Track your baby's daily activities with ease",
@@ -32,6 +43,25 @@ export const metadata: Metadata = {
   },
 };
 
+/**
+ * LocaleLayout component
+ *
+ * Purpose:
+ * - Provides the main layout for all locale-based routes.
+ * - Loads the correct language messages for internationalization.
+ * - Wraps the app with user context, session protection, navigation, and idle logout logic.
+ *
+ * Advantages:
+ * - Centralizes layout and context providers for all pages.
+ * - Ensures consistent language and session management across the app.
+ * - Improves maintainability and scalability for i18n and authentication.
+ *
+ * @param {object} props - The component props.
+ * @param {React.ReactNode} props.children - The content to render inside the layout.
+ * @param {object} props.params - The route parameters, including locale.
+ * @param {string} props.params.locale - The current locale code.
+ * @returns {JSX.Element} The complete HTML layout for the locale route.
+ */
 export default async function LocaleLayout({
   children,
   params,
@@ -39,6 +69,7 @@ export default async function LocaleLayout({
   children: React.ReactNode;
   params: { locale: string };
 }) {
+  // Loads translation messages for the current locale
   const language = await loadLanguage(params.locale);
 
   return (
@@ -65,11 +96,17 @@ export default async function LocaleLayout({
         suppressHydrationWarning
         className={`${poppins.variable} antialiased`}
       >
+        {/* Provides translation messages and locale to all components */}
         <NextIntlClientProvider locale={params.locale} messages={language}>
+          {/* Provides user authentication context to the app */}
           <UserProvider>
+            {/* Handles automatic logout on user inactivity */}
             <IdleLogout />
+            {/* Protects routes and manages session-based access */}
             <SessionGate>
+              {/* Renders the navigation bar */}
               <NavigationWrapper />
+              {/* Renders the page content */}
               {children}
             </SessionGate>
           </UserProvider>

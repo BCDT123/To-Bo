@@ -14,15 +14,32 @@ import { useTranslations } from "next-intl";
 import { MdEmail } from "react-icons/md";
 import { RiLockPasswordFill } from "react-icons/ri";
 
+/**
+ * LoginMail component
+ *
+ * Purpose:
+ * - Renders a login form for users to sign in with email and password.
+ * - Handles validation and authentication logic.
+ *
+ * Advantages:
+ * - Provides a simple and accessible way for users to log in.
+ * - Displays error messages and loading state for better UX.
+ *
+ * @returns {JSX.Element} The login form UI.
+ */
 export default function LoginMail() {
   const tCommon = useTranslations("common");
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
-
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  const setUser = useSetUser(); // <-- Obtén la función aquí
+  const setUser = useSetUser(); // Function to update user context
 
+  /**
+   * Handles the login process when the user clicks the continue button.
+   *
+   * @returns {Promise<void>} No return value. Updates user context and error state.
+   */
   const handleContinue = async () => {
     if (!email.includes("@")) {
       setError("Please enter a valid email address.");
@@ -43,6 +60,7 @@ export default function LoginMail() {
       setLoading(false);
     }
   };
+
   return (
     <>
       <InputWithIcon

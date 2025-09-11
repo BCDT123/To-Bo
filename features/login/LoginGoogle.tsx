@@ -12,14 +12,32 @@ import { useTranslations } from "next-intl";
 import { FaGoogle } from "react-icons/fa";
 import { useRouter } from "next/navigation";
 
+/**
+ * LoginGoogle component
+ *
+ * Purpose:
+ * - Renders a button for users to log in with Google authentication.
+ * - Handles authentication logic and updates user context.
+ *
+ * Advantages:
+ * - Provides a quick and accessible way for users to log in with Google.
+ * - Displays error messages and loading state for better UX.
+ *
+ * @returns {JSX.Element} The Google login button and error message UI.
+ */
 export default function LoginGoogle() {
   const tAuth = useTranslations("auth");
   const tCommon = useTranslations("common");
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const setUser = useSetUser(); // <-- Obtén la función aquí
+  const setUser = useSetUser(); // Function to update user context
 
+  /**
+   * Handles the Google login process when the user clicks the button.
+   *
+   * @returns {Promise<void>} No return value. Updates user context and error state.
+   */
   const handleLogin = async () => {
     setLoading(true);
     setError("");
