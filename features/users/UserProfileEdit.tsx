@@ -136,44 +136,49 @@ export default function UserProfileEdit() {
   ));
 
   return (
-    <section className="max-w-md mx-auto">
-      <form onSubmit={handleSubmit} className="flex flex-col p-5">
+    <section className="max-w-md mx-auto h-full">
+      <form
+        onSubmit={handleSubmit}
+        className="flex flex-col p-5 justify-between h-full"
+      >
         <UserImageEdit
           photoUrl={form.photoUrl}
           name={form.name}
           onImageChange={handleImageChange}
         />
-        <h1 className="text-xl font-bold mb-4 text-center">
-          {tProfile("editProfile")}
-        </h1>
-        <InputForm
-          type="text"
-          name="name"
-          value={form.name}
-          onChange={handleFormChange}
-          placeholder={tProfile("name")}
-          required
-        />
 
-        <InputForm
-          type="email"
-          name="email"
-          value={form.email}
-          onChange={handleFormChange}
-          placeholder={tProfile("email")}
-          required
-        />
+        <div>
+          <h1 className="text-xl font-bold mb-4 text-center">
+            {tProfile("editProfile")}
+          </h1>
+          <InputForm
+            type="text"
+            name="name"
+            value={form.name}
+            onChange={handleFormChange}
+            placeholder={tProfile("name")}
+            required
+          />
 
-        <SelectForm
-          name="language"
-          value={form.language?.split("-")[0]}
-          onChange={handleFormChange}
-          placeholder={tProfile("language")}
-          className="focus:outline-none"
-        >
-          {options}
-        </SelectForm>
+          <InputForm
+            type="email"
+            name="email"
+            value={form.email}
+            onChange={handleFormChange}
+            placeholder={tProfile("email")}
+            required
+          />
 
+          <SelectForm
+            name="language"
+            value={form.language?.split("-")[0]}
+            onChange={handleFormChange}
+            placeholder={tProfile("language")}
+            className="focus:outline-none"
+          >
+            {options}
+          </SelectForm>
+        </div>
         <Button type="submit" className="mt-4">
           {tProfile("update")}
         </Button>

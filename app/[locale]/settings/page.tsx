@@ -1,5 +1,5 @@
 //pagina de test
 "use client";
-export default function HelloPage() {
+export default function SettingsPage() {
   return <div className="card"></div>;
 }

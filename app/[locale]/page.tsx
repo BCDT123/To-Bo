@@ -14,17 +14,6 @@ export default function Home() {
   return (
     <section className="md:pt-16">
       <HeaderHome />
-      <ProfileModalConsumer />
     </section>
-  );
-}
-
-// Modal consumer component
-function ProfileModalConsumer() {
-  const { showProfile, setShowProfile } = useProfileModal();
-  return (
-    <Modal open={showProfile} onClose={() => setShowProfile(false)}>
-      <UserProfileEdit />
-    </Modal>
   );
 }

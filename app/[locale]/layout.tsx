@@ -7,7 +7,9 @@ import { UserProvider } from "@/features/users/userContext";
 import IdleLogout from "@/features/login/IdleLogout";
 import NavigationWrapper from "@/components/nav/NavigationWrapper";
 import SessionGate from "@/features/login/SessionGate";
+import ProfileModalConsumer from "@/features/users/ProfileModalConsumer";
 import { ProfileModalProvider } from "@/features/users/ProfileModalContext";
+
 const poppins = Poppins({
   variable: "--font-poppins",
   weight: ["300", "400", "500", "700"],
@@ -109,6 +111,7 @@ export default async function LocaleLayout({
                 <NavigationWrapper />
                 {/* Renders the page content */}
                 {children}
+                <ProfileModalConsumer />
               </ProfileModalProvider>
             </SessionGate>
           </UserProvider>

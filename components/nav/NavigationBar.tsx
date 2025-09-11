@@ -66,10 +66,9 @@ export default function NavigationBar({ pathname }: NavBarProps) {
       submenu: [
         {
           label: tNavbar("profile"),
-          href: "/",
           onClick: () => setShowProfile(true),
         },
-        { label: tNavbar("settings"), href: "/user/settings" },
+        { label: tNavbar("settings"), href: "/settings" },
         { label: tNavbar("logout"), onClick: logout },
       ],
     },
