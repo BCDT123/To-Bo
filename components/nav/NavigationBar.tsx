@@ -12,14 +12,28 @@ import letterImg from "@/public/favicon/letter.png";
 import { NavItemData } from "@/types/props";
 import { logout } from "@/features/login/auth";
 import { useTranslations } from "next-intl";
+import { useProfileModal } from "@/features/users/ProfileModalContext";
 
-interface NavBarProps {
-  pathname: string;
-}
-
+/**
+ * NavigationBar component
+ *
+ * Purpose:
+ * - Renders the main navigation bar for the application.
+ * - Displays navigation icons and user menu.
+ * - Hides navigation icons when the profile modal is active.
+ *
+ * Props:
+ * @param {string} pathname - The current route path.
+ *
+ * Returns:
+ * @returns {JSX.Element} The navigation bar element.
+ */
 export default function NavigationBar({ pathname }: NavBarProps) {
+  const { setShowProfile } = useProfileModal();
   const tNavbar = useTranslations("navbar");
-  //generando data de menu
+  const { showProfile } = useProfileModal(); // Reads the modal state
+
+  // Generates menu data
   const navItems: NavItemData[] = [
     {
       label: tNavbar("home"),
@@ -50,7 +64,11 @@ export default function NavigationBar({ pathname }: NavBarProps) {
       href: "/user",
       icon: <FiUser className="h-5 w-5" />,
       submenu: [
-        { label: tNavbar("profile"), href: "/user/profile" },
+        {
+          label: tNavbar("profile"),
+          href: "/",
+          onClick: () => setShowProfile(true),
+        },
         { label: tNavbar("settings"), href: "/user/settings" },
         { label: tNavbar("logout"), onClick: logout },
       ],
@@ -64,7 +82,7 @@ export default function NavigationBar({ pathname }: NavBarProps) {
                  bottom-0 h-12
                  md:top-0 md:bottom-auto md:h-16"
     >
-      {/* Logo visible solo en pantallas md+ */}
+      {/* Logo visible only on md+ screens */}
       <div className="hidden md:block">
         <Image
           alt="Logo"
@@ -75,12 +93,22 @@ export default function NavigationBar({ pathname }: NavBarProps) {
         />
       </div>
 
-      {/* Íconos de navegación */}
-      <div className="flex justify-around w-full md:w-auto md:gap-6">
-        {navItems.map((item) => (
-          <NavItem key={item.href} {...item} />
-        ))}
-      </div>
+      {/* Navigation icons */}
+      {showProfile ? null : (
+        <div className="flex justify-around w-full md:w-auto md:gap-6">
+          {navItems.map((item) => (
+            <NavItem key={item.href} {...item} />
+          ))}
+        </div>
+      )}
     </nav>
   );
+}
+
+/**
+ * Props for NavigationBar
+ * @property {string} pathname - The current route path.
+ */
+export interface NavBarProps {
+  pathname: string;
 }

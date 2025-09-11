@@ -1,12 +1,32 @@
 import { NavItemData } from "@/types/props";
 import Link from "next/link";
 import React from "react";
+import { ButtonModalClose } from "@/components/Button";
+import { IoMdClose } from "react-icons/io";
 
+/**
+ * Props for Submenu and SubmenuMobile
+ * @property {NavItemData[]} menu - Array of submenu items.
+ * @property {() => void} [onClick] - Optional callback when an item is clicked.
+ */
 interface NavBarProps {
   menu: NavItemData[];
   onClick?: () => void;
 }
 
+/**
+ * Submenu component
+ *
+ * Purpose:
+ * - Renders a submenu for navigation items on desktop screens.
+ * - Handles click events for submenu items and closes the submenu after navigation.
+ *
+ * Parameters:
+ * @param {NavBarProps} props - Contains the menu array and optional onClick handler.
+ *
+ * Returns:
+ * @returns {JSX.Element} The submenu element for desktop.
+ */
 export default function Submenu({ menu, onClick }: NavBarProps) {
   return (
     <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2 top-full mt-2 bg-white shadow-lg rounded-md py-2 w-48 z-50">
@@ -17,7 +37,7 @@ export default function Submenu({ menu, onClick }: NavBarProps) {
           aria-label={item.label}
           className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
           onClick={() => {
-            // Espera breve para permitir que el navegador procese el enlace
+            // Brief delay to allow the browser to process the link navigation
             if (item.onClick) {
               item.onClick();
             }
@@ -33,6 +53,20 @@ export default function Submenu({ menu, onClick }: NavBarProps) {
   );
 }
 
+/**
+ * SubmenuMobile component
+ *
+ * Purpose:
+ * - Renders a submenu for navigation items on mobile screens.
+ * - Handles click events for submenu items and closes the submenu after navigation.
+ * - Includes a close button for the submenu.
+ *
+ * Parameters:
+ * @param {NavBarProps} props - Contains the menu array and optional onClick handler.
+ *
+ * Returns:
+ * @returns {JSX.Element} The submenu element for mobile.
+ */
 export function SubmenuMobile({ menu, onClick }: NavBarProps) {
   return (
     <div className="md:hidden fixed inset-0 bg-white z-50 flex flex-col items-center justify-center space-y-6 text-lg shadow-lg">
@@ -55,12 +89,9 @@ export function SubmenuMobile({ menu, onClick }: NavBarProps) {
           {item.label}
         </Link>
       ))}
-      <button
-        onClick={onClick}
-        className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 text-2xl"
-      >
-        ✕
-      </button>
+      <ButtonModalClose onClick={onClick}>
+        <IoMdClose />
+      </ButtonModalClose>
     </div>
   );
 }

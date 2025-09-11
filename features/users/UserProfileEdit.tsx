@@ -1,11 +1,11 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { useTranslations } from "next-intl";
-//context and services
+// Context and services
 import { useUser, useSetUser } from "@/features/users/userContext";
 import { userService } from "@/features/users/userService";
 import { supportedLanguages } from "@/config/locales";
-//components
+// Components
 import ErrorMessage from "@/components/ErrorMessage";
 import { InputForm } from "@/components/Input";
 import Button from "@/components/Button";
@@ -14,10 +14,24 @@ import SuccessMessage from "@/components/SuccessMessage";
 import UserImageEdit from "@/components/UserImageEdit";
 import { updateUserWithImage } from "@/features/users/userProfile";
 
+/**
+ * UserProfileEdit component
+ *
+ * Purpose:
+ * - Renders the user profile edit form.
+ * - Handles user data update, including image upload and language selection.
+ * - Displays error and success messages.
+ *
+ * Parameters:
+ * - None
+ *
+ * Returns:
+ * @returns {JSX.Element} The user profile edit form section.
+ */
 export default function UserProfileEdit() {
   const tProfile = useTranslations("profile");
   const user = useUser();
-  const setUser = useSetUser(); // <-- Obtén la función aquí
+  const setUser = useSetUser();
   const [imageFile, setImageFile] = useState<File | undefined>(undefined);
 
   const [form, setForm] = useState({
@@ -29,6 +43,7 @@ export default function UserProfileEdit() {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
 
+  // Loads user data into the form when the user context changes
   useEffect(() => {
     if (user) {
       setForm({
@@ -40,6 +55,10 @@ export default function UserProfileEdit() {
     }
   }, [user]);
 
+  /**
+   * Handles changes in form inputs
+   * @param {React.ChangeEvent<HTMLInputElement | HTMLSelectElement>} e - The input change event.
+   */
   const handleFormChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
@@ -50,9 +69,13 @@ export default function UserProfileEdit() {
     }));
   };
 
+  /**
+   * Handles image file selection and preview
+   * @param {File} file - The selected image file.
+   */
   const handleImageChange = (file: File) => {
     setImageFile(file);
-    // Vista previa local opcional
+    // Optional local preview
     const reader = new FileReader();
     reader.onloadend = () => {
       setForm((prev) => ({
@@ -63,6 +86,10 @@ export default function UserProfileEdit() {
     reader.readAsDataURL(file);
   };
 
+  /**
+   * Handles form submission for updating user profile
+   * @param {React.FormEvent} e - The form submit event.
+   */
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
@@ -73,17 +100,17 @@ export default function UserProfileEdit() {
       return;
     }
 
-    // Validaciones
+    // Validations
     if (!form.name.trim()) {
-      setError(tProfile("nameRequired") || "El nombre es obligatorio.");
+      setError(tProfile("nameRequired") || "Name is required.");
       return;
     }
     if (!form.email.includes("@")) {
-      setError(tProfile("invalidEmail") || "El email no es válido.");
+      setError(tProfile("invalidEmail") || "Email is not valid.");
       return;
     }
     if (form.name.length < 2) {
-      setError(tProfile("nameTooShort") || "El nombre es muy corto.");
+      setError(tProfile("nameTooShort") || "Name is too short.");
       return;
     }
 
@@ -96,11 +123,12 @@ export default function UserProfileEdit() {
     }
   };
 
+  // Loading and error states for user context
   if (user === undefined)
-    return <p>{tProfile("loadingUser") || "Cargando usuario..."}</p>;
-  if (user === null)
-    return <p>{tProfile("noUser") || "No hay usuario logueado."}</p>;
+    return <p>{tProfile("loadingUser") || "Loading user..."}</p>;
+  if (user === null) return <p>{tProfile("noUser") || "No user logged in."}</p>;
 
+  // Language options for the select input
   const options = Object.entries(supportedLanguages).map(([locale, name]) => (
     <option key={locale} value={locale}>
       {name}
@@ -108,7 +136,7 @@ export default function UserProfileEdit() {
   ));
 
   return (
-    <section className=" max-w-md mx-auto mt-16 h-screen">
+    <section className="max-w-md mx-auto">
       <form onSubmit={handleSubmit} className="flex flex-col p-5">
         <UserImageEdit
           photoUrl={form.photoUrl}

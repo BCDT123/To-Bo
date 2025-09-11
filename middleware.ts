@@ -1,39 +1,57 @@
-
 // middleware.ts
-import { NextRequest, NextResponse } from 'next/server';
-import { match } from '@formatjs/intl-localematcher';
-import {supportedLocales,defaultLocale} from "@/config/locales"
+import { NextRequest, NextResponse } from "next/server";
+import { match } from "@formatjs/intl-localematcher";
+import { supportedLocales, defaultLocale } from "@/config/locales";
 
-// Detecta el idioma del navegador antes de que se cargue la página
-// Redirige al usuario a la ruta correcta (/es, /en, etc.)
-// Evita que alguien llegue a / y vea un 404
-
+/**
+ * Middleware function
+ *
+ * Purpose:
+ * - Detects the user's browser language before the page loads.
+ * - Redirects the user to the correct locale route (/es, /en, etc.).
+ * - Prevents users from landing on / and seeing a 404.
+ *
+ * Parameters:
+ * @param {NextRequest} request - The incoming request object from Next.js.
+ *
+ * Returns:
+ * @returns {NextResponse} The response object, either allowing the request to proceed or redirecting to the correct locale.
+ */
 export function middleware(request: NextRequest) {
-  const acceptLanguage = request.headers.get('accept-language') || '';
+  // Get the Accept-Language header from the request
+  const acceptLanguage = request.headers.get("accept-language") || "";
+  // Parse the languages from the header
   const languages = acceptLanguage
-  .split(',')
-  .map(lang => lang.split(';')[0].trim()) // Elimina el ";q=..." y espacios
-  .filter(Boolean); // Elimina strings vacíos
+    .split(",")
+    .map((lang) => lang.split(";")[0].trim()) // Removes ";q=..." and spaces
+    .filter(Boolean); // Removes empty strings
 
+  // Extract short language codes (e.g., "en" from "en-US")
+  const shortLanguages = languages.map((lang) => lang.split("-")[0]);
+  // Match the user's language to a supported locale
+  const locale = match(shortLanguages, supportedLocales, defaultLocale);
 
-const shortLanguages = languages.map(lang => lang.split('-')[0]);
-const locale = match(shortLanguages, supportedLocales, defaultLocale);
+  // Conditional logs for development
+  if (process.env.NODE_ENV === "development") {
+    console.log("Middleware Detected languages:", languages);
+    console.log("Middleware Resolved locale:", locale);
+  }
 
-// logs condicionales para desarrollo:
-if (process.env.NODE_ENV === 'development') {
-  console.log('Middleware Detected languages:', languages);
-  console.log('Middleware Resolved locale:', locale);
-}
   const pathname = request.nextUrl.pathname;
-  // Si ya incluye el locale, no redirigir
+  // If the pathname already includes a locale, do not redirect
   if (supportedLocales.some((loc) => pathname.startsWith(`/${loc}`))) {
     return NextResponse.next();
   }
 
-  // Redirigir a /[locale]
+  // Redirect to /[locale] if not present
   return NextResponse.redirect(new URL(`/${locale}${pathname}`, request.url));
 }
 
+/**
+ * Configuration for the middleware matcher
+ *
+ * matcher: Defines which routes the middleware should run on.
+ */
 export const config = {
-  matcher: ['/((?!_next|favicon|site.webmanifest|api).*)'],
+  matcher: ["/((?!_next|favicon|site.webmanifest|api).*)"],
 };

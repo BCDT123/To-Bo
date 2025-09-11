@@ -1,5 +1,13 @@
 import React, { ReactNode } from "react";
 
+/**
+ * Props for Button components
+ * @property {ReactNode} children - Content to render inside the button.
+ * @property {() => void} [onClick] - Optional click handler.
+ * @property {boolean} [isActive] - Indicates if the button is active (for ButtonLink).
+ * @property {string} [label] - Optional aria-label for accessibility.
+ * @property {boolean} [disabled] - Indicates if the button is disabled.
+ */
 type ButtonProps = {
   children: ReactNode;
   onClick?: () => void;
@@ -8,6 +16,18 @@ type ButtonProps = {
   disabled?: boolean;
 };
 
+/**
+ * Button component
+ *
+ * Purpose:
+ * - Renders a styled button for general actions.
+ *
+ * Parameters:
+ * @param {ButtonProps & React.InputHTMLAttributes<HTMLInputElement>} props - Button props and standard input attributes.
+ *
+ * Returns:
+ * @returns {JSX.Element} The styled button element.
+ */
 export default function Button({
   children,
   onClick,
@@ -28,6 +48,18 @@ export default function Button({
   );
 }
 
+/**
+ * ButtonLink component
+ *
+ * Purpose:
+ * - Renders a button styled as a navigation link.
+ *
+ * Parameters:
+ * @param {ButtonProps} props - Button props including children, onClick, isActive, and label.
+ *
+ * Returns:
+ * @returns {JSX.Element} The navigation link button element.
+ */
 export function ButtonLink({
   children,
   onClick,
@@ -41,6 +73,33 @@ export function ButtonLink({
       className={`flex flex-col items-center justify-center text-sm focus:outline-none ${
         isActive ? "text-gray-700" : "text-gray-400"
       } hover:text-gray-700 active:text-gray-700`}
+    >
+      {children}
+    </button>
+  );
+}
+
+/**
+ * ButtonModalClose component
+ *
+ * Purpose:
+ * - Renders a button for closing modals, positioned in the top-right corner.
+ *
+ * Parameters:
+ * @param {ButtonProps & React.InputHTMLAttributes<HTMLInputElement>} props - Button props and standard input attributes.
+ *
+ * Returns:
+ * @returns {JSX.Element} The modal close button element.
+ */
+export function ButtonModalClose({
+  children,
+  onClick,
+  ...props
+}: ButtonProps & React.InputHTMLAttributes<HTMLInputElement>) {
+  return (
+    <button
+      onClick={onClick}
+      className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 text-2xl"
     >
       {children}
     </button>
