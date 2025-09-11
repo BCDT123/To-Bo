@@ -66,9 +66,15 @@ export default function IdleLogout() {
     return () => clearInterval(timer);
   }, [showPrompt]); // se ejecuta cada que showPrompt Cambia
 
+  // Redirection effect if user is not logged in
+  useEffect(() => {
+    if (!user) {
+      router.push("/"); // Redirect to main
+    }
+  }, [user, router]);
+
   // condicionar el render
   if (!user) {
-    router.push("/"); //redireccionamos a main
     return null;
   }
 

@@ -22,17 +22,19 @@ export default function SessionGate({
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((firebaseUser) => {
       setUser(firebaseUser);
-      if (!firebaseUser && !isPublicRoute) {
-        router.replace("/login");
-      }
     });
-
     return () => unsubscribe();
-  }, [router, isPublicRoute]);
+  }, []);
+
+  useEffect(() => {
+    if (user === null && !isPublicRoute) {
+      router.replace("/login");
+    }
+  }, [user, isPublicRoute, router]);
 
   useEffect(() => {
     if (user && pathname.endsWith("/login")) {
-      router.replace("/"); // Redirige a home
+      router.replace("/");
     }
   }, [user, pathname, router]);
 
@@ -50,11 +52,6 @@ export default function SessionGate({
     );
   }
 
-  if (user === null && !isPublicRoute) {
-    router.replace("/login");
-    return null;
-  }
-
   // Si es ruta pública, renderiza aunque no haya usuario
   if (isPublicRoute) {
     return <>{children}</>;
@@ -65,6 +62,6 @@ export default function SessionGate({
     return <>{children}</>;
   }
 
-  // Si no hay usuario y no es ruta pública, ya redirigió
+  // Si no hay usuario y no es ruta pública, ya redirigió en useEffect
   return null;
 }

@@ -82,6 +82,10 @@ export const newUserWithEmailAndPassword = async (
     const result = await createUserWithEmailAndPassword(auth, email, password);
     return result.user;
   } catch (err: any) {
-    handleError("Error creating user with email:", err, err.message);
+    if (err.code === "auth/email-already-in-use") {
+      throw err; // Propagate the error to be handled by the caller
+    } else {
+      handleError("Error creating user with email:", err, err.message);
+    }
   }
 };
