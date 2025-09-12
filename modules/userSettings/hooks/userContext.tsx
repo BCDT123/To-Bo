@@ -4,7 +4,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { onAuthStateChanged, User as FirebaseUser } from "firebase/auth";
 import { auth, firestore } from "@/firebaseConfig";
 import { doc, getDoc } from "firebase/firestore";
-import { User as AppUser } from "@/features/users/userModel";
+import { User as AppUser } from "@/modules/userSettings/types/userModel";
 
 /**
  * Context type for user state management.

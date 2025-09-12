@@ -3,12 +3,12 @@ import { Poppins } from "next/font/google";
 import "@/app/globals.css";
 import { NextIntlClientProvider } from "next-intl";
 import { loadLanguage } from "@/i18n/loadLanguages";
-import { UserProvider } from "@/features/users/userContext";
-import IdleLogout from "@/features/login/IdleLogout";
+import { UserProvider } from "@/modules/userSettings/hooks/userContext";
+import IdleLogout from "@/modules/auth/components/SessionTimeout";
 import NavigationWrapper from "@/shared/components/nav/NavigationWrapper";
-import SessionGate from "@/features/login/SessionGate";
-import ProfileModalConsumer from "@/features/users/ProfileModalConsumer";
-import { ProfileModalProvider } from "@/features/users/ProfileModalContext";
+import SessionGate from "@/modules/auth/components/SessionGate";
+import ProfileModalConsumer from "@/modules/userSettings/hooks/ProfileModalConsumer";
+import { ProfileModalProvider } from "@/modules/userSettings/hooks/ProfileModalContext";
 
 const poppins = Poppins({
   variable: "--font-poppins",

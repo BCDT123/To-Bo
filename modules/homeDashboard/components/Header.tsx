@@ -1,5 +1,5 @@
 "use client";
-import { useUser } from "@/features/users/userContext";
+import { useUser } from "@/modules/userSettings/hooks/userContext";
 
 type HeaderHomeProps = {
   user: string;

@@ -1,16 +1,16 @@
 "use client";
 import React from "react";
-import { useUser } from "@/features/users/userContext"; // Custom hook to get the current user (client-side)
+import { useUser } from "@/modules/userSettings/hooks/userContext"; // Custom hook to get the current user (client-side)
 import { useIdleTimer } from "react-idle-timer"; // Detects user inactivity (client-side)
 import { signOut } from "firebase/auth"; // Signs out the user from Firebase (client-side)
 import { auth } from "@/firebaseConfig"; // Firebase instance (client-side)
 import { useState, useEffect } from "react"; // React hooks (client-side)
 import { useTranslations } from "next-intl"; // Translation hook (client-side)
-import IdleModal from "@/features/login/IdleModal";
+import IdleModal from "@/modules/auth/components/IdleModal";
 import { useRouter } from "next/navigation";
 
 /**
- * IdleLogout component
+ * SessionTimeout component
  *
  * Purpose:
  * - Detects user inactivity and automatically logs out the user after a set period.
@@ -22,7 +22,7 @@ import { useRouter } from "next/navigation";
  *
  * @returns {JSX.Element | null} The idle modal UI or null if no user is logged in.
  */
-export default function IdleLogout() {
+export default function SessionTimeout() {
   const user = useUser(); // Gets the current user. If no user, nothing is rendered.
   const [showPrompt, setShowPrompt] = useState(false); // Controls whether the modal is shown.
   const [countdown, setCountdown] = useState(10); // Countdown before automatic logout.

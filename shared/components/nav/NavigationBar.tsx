@@ -12,9 +12,9 @@ import { RiAddBoxFill } from "react-icons/ri";
 import letterImg from "@/public/favicon/letter.png";
 
 import { NavItemData } from "@/shared/types/props";
-import { logout } from "@/features/login/auth";
+import { logout } from "@/modules/auth/services/auth";
 import { useTranslations } from "next-intl";
-import { useProfileModal } from "@/features/users/ProfileModalContext";
+import { useProfileModal } from "@/modules/userSettings/hooks/ProfileModalContext";
 
 /**
  * NavigationBar component

@@ -1,16 +1,8 @@
 "use client";
 import React, { useState } from "react";
-import HeaderHome from "@/features/home/Header";
-import Modal from "@/components/Modal";
-import UserProfileEdit from "@/features/users/UserProfileEdit"; // Ajusta el import si es necesario
-import {
-  ProfileModalProvider,
-  useProfileModal,
-} from "@/features/users/ProfileModalContext";
+import HeaderHome from "@/modules/homeDashboard/components/Header";
 
 export default function Home() {
-  const [showProfile, setShowProfile] = useState(false);
-
   return (
     <section className="md:pt-16">
       <HeaderHome />

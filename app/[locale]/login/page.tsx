@@ -4,12 +4,12 @@ import { useTranslations } from "next-intl";
 
 //Components
 import Image from "next/image";
-import Divider from "@/components/Divider";
+import Divider from "@/shared/components/atoms/Divider";
 
 //icons
 import letterImg from "@/public/favicon/letter.png";
-import LoginGoogle from "@/features/login/LoginGoogle";
-import LoginMail from "@/features/login/LoginMail";
+import LoginGoogle from "@/modules/auth/components/LoginGoogle";
+import LoginMail from "@/modules/auth/components/LoginMail";
 
 export default function LoginPage() {
   const tAuth = useTranslations("auth");

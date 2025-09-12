@@ -1,7 +1,7 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import Login from "@/features/login/LoginGoogle";
+import Login from "@/modules/auth/components/LoginGoogle";
 import "@testing-library/jest-dom";
 
 const pushMock = jest.fn();

@@ -1,7 +1,7 @@
 // __tests__/SessionGate.test.tsx
 import React from "react";
 import { render, screen, act } from "@testing-library/react";
-import SessionGate from "@/features/login/SessionGate";
+import SessionGate from "@/modules/auth/components/SessionGate";
 import "@testing-library/jest-dom";
 import { usePathname, useRouter } from "next/navigation";
 import { auth } from "@/firebaseConfig";

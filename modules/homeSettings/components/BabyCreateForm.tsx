@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
-import { babyService } from "./babyService";
-import { Baby } from "./babyModel";
+import { babyService } from "../services/babyService";
+import { Baby } from "../types/babyModel";
 import {
   InputForm,
   SelectForm,

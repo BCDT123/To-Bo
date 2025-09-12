@@ -1,18 +1,20 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
-// Context and services
-import { useUser, useSetUser } from "@/features/users/userContext";
-import { userService } from "@/features/users/userService";
+import { useUser, useSetUser } from "@/modules/userSettings/hooks/userContext";
 import { supportedLanguages } from "@/config/locales";
-// Components
 import ErrorMessage from "@/shared/components/atoms/ErrorMessage";
 import { InputForm } from "@/shared/components/atoms/Input";
 import Button from "@/shared/components/atoms/Button";
 import { SelectForm } from "@/shared/components/atoms/Input";
 import SuccessMessage from "@/shared/components/atoms/SuccessMessage";
 import UserImageEdit from "@/shared/components/atoms/UserImageEdit";
-import { updateUserWithImage } from "@/features/users/userProfile";
+import { updateUserWithImage } from "@/modules/userSettings/services/userProfile";
+import { useYupForm } from "@/shared/utilities/formValidation";
+import {
+  userProfileSchema,
+  UserProfileFormData,
+} from "../validation/userProfileSchema";
 
 /**
  * UserProfileEdit component
@@ -22,9 +24,6 @@ import { updateUserWithImage } from "@/features/users/userProfile";
  * - Handles user data update, including image upload and language selection.
  * - Displays error and success messages.
  *
- * Parameters:
- * - None
- *
  * Returns:
  * @returns {JSX.Element} The user profile edit form section.
  */
@@ -33,41 +32,33 @@ export default function UserProfileEdit() {
   const user = useUser();
   const setUser = useSetUser();
   const [imageFile, setImageFile] = useState<File | undefined>(undefined);
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
 
-  const [form, setForm] = useState({
+  // Use the generic hook for form and validation
+  const form = useYupForm<UserProfileFormData>(userProfileSchema, {
     email: "",
     name: "",
     photoUrl: "",
     language: "en",
   });
-  const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
 
-  // Loads user data into the form when the user context changes
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors },
+  } = form;
+
+  // Load user data into the form when the user context changes
   useEffect(() => {
     if (user) {
-      setForm({
-        email: user.email || "",
-        name: user.name || "",
-        photoUrl: user.photoUrl || "",
-        language: user.language || "en",
-      });
+      setValue("email", user.email || "");
+      setValue("name", user.name || "");
+      setValue("photoUrl", user.photoUrl || "");
+      setValue("language", user.language || "en");
     }
-  }, [user]);
-
-  /**
-   * Handles changes in form inputs
-   * @param {React.ChangeEvent<HTMLInputElement | HTMLSelectElement>} e - The input change event.
-   */
-  const handleFormChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
-  ) => {
-    const { name, value, type } = e.target;
-    setForm((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
+  }, [user, setValue]);
 
   /**
    * Handles image file selection and preview
@@ -75,23 +66,18 @@ export default function UserProfileEdit() {
    */
   const handleImageChange = (file: File) => {
     setImageFile(file);
-    // Optional local preview
     const reader = new FileReader();
     reader.onloadend = () => {
-      setForm((prev) => ({
-        ...prev,
-        photoUrl: reader.result as string,
-      }));
+      setValue("photoUrl", reader.result as string);
     };
     reader.readAsDataURL(file);
   };
 
   /**
    * Handles form submission for updating user profile
-   * @param {React.FormEvent} e - The form submit event.
+   * @param {UserProfileFormData} data - The form data.
    */
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const onSubmit = async (data: UserProfileFormData) => {
     setError("");
     setSuccess("");
 
@@ -100,22 +86,8 @@ export default function UserProfileEdit() {
       return;
     }
 
-    // Validations
-    if (!form.name.trim()) {
-      setError(tProfile("nameRequired") || "Name is required.");
-      return;
-    }
-    if (!form.email.includes("@")) {
-      setError(tProfile("invalidEmail") || "Email is not valid.");
-      return;
-    }
-    if (form.name.length < 2) {
-      setError(tProfile("nameTooShort") || "Name is too short.");
-      return;
-    }
-
     try {
-      const updatedUser = await updateUserWithImage(user.id, form, imageFile);
+      const updatedUser = await updateUserWithImage(user.id, data, imageFile);
       setSuccess(tProfile("success"));
       setUser(updatedUser);
     } catch (err: any) {
@@ -123,12 +95,10 @@ export default function UserProfileEdit() {
     }
   };
 
-  // Loading and error states for user context
   if (user === undefined)
     return <p>{tProfile("loadingUser") || "Loading user..."}</p>;
   if (user === null) return <p>{tProfile("noUser") || "No user logged in."}</p>;
 
-  // Language options for the select input
   const options = Object.entries(supportedLanguages).map(([locale, name]) => (
     <option key={locale} value={locale}>
       {name}
@@ -138,12 +108,12 @@ export default function UserProfileEdit() {
   return (
     <section className="max-w-md mx-auto h-full">
       <form
-        onSubmit={handleSubmit}
+        onSubmit={handleSubmit(onSubmit)}
         className="flex flex-col p-5 justify-between h-full"
       >
         <UserImageEdit
-          photoUrl={form.photoUrl}
-          name={form.name}
+          photoUrl={user?.photoUrl}
+          name={user?.name}
           onImageChange={handleImageChange}
         />
 
@@ -153,31 +123,28 @@ export default function UserProfileEdit() {
           </h1>
           <InputForm
             type="text"
-            name="name"
-            value={form.name}
-            onChange={handleFormChange}
+            {...register("name")}
             placeholder={tProfile("name")}
             required
           />
+          <ErrorMessage message={errors.name?.message as string} />
 
           <InputForm
             type="email"
-            name="email"
-            value={form.email}
-            onChange={handleFormChange}
+            {...register("email")}
             placeholder={tProfile("email")}
             required
           />
+          <ErrorMessage message={errors.email?.message as string} />
 
           <SelectForm
-            name="language"
-            value={form.language?.split("-")[0]}
-            onChange={handleFormChange}
+            {...register("language")}
             placeholder={tProfile("language")}
             className="focus:outline-none"
           >
             {options}
           </SelectForm>
+          <ErrorMessage message={errors.language?.message as string} />
         </div>
         <Button type="submit" className="mt-4">
           {tProfile("update")}

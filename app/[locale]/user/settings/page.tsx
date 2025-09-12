@@ -1,7 +1,7 @@
 //pagina de test
 "use client";
 import React from "react";
-import BabyCreateForm from "@/features/settings/baby/BabyCreateForm";
+import BabyCreateForm from "@/modules/homeSettings/components/BabyCreateForm";
 
 export default function SettingsPage() {
   return (

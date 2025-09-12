@@ -1,6 +1,6 @@
-import useMock from "../../config/useMock";
+import useMock from "../../../config/useMock";
 import { firestoreMock } from "@/shared/mocks/mockService";
-import { endpoints } from "../../config/endpoints";
+import { endpoints } from "../../../config/endpoints";
 
 import {
   fetchCollection,
@@ -11,7 +11,7 @@ import {
   uploadFileToStorage,
 } from "@/shared/services/firestore/firestore";
 
-import { User } from "@/features/users/userModel";
+import { User } from "@/modules/userSettings/types/userModel";
 
 /**
  * User service for interacting with Firestore and mock services.

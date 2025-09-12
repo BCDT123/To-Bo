@@ -1,5 +1,5 @@
 import { handleError } from "@/shared/utilities/errorHandler";
-import { getUserDefault } from "@/features/users/userProfile";
+import { getUserDefault } from "@/modules/userSettings/services/userProfile";
 import { authService } from "./authService";
 
 /**

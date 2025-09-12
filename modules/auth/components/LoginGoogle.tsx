@@ -1,10 +1,10 @@
 "use client";
 import React, { useState } from "react";
 //components
-import { loginWithPopup } from "@/features/login/auth";
+import { loginWithPopup } from "@/modules/auth/services/auth";
 import Button from "@/shared/components/atoms/Button";
 import ErrorMessage from "@/shared/components/atoms/ErrorMessage";
-import { useUser, useSetUser } from "@/features/users/userContext";
+import { useUser, useSetUser } from "@/modules/userSettings/hooks/userContext";
 //Translations
 import { useTranslations } from "next-intl";
 

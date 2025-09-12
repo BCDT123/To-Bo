@@ -3,9 +3,9 @@ import React, { useState } from "react";
 //components
 import InputWithIcon from "@/shared/components/atoms/Input";
 import Button from "@/shared/components/atoms/Button";
-import { signInWithEmail } from "@/features/login/auth";
+import { signInWithEmail } from "@/modules/auth/services/auth";
 import ErrorMessage from "@/shared/components/atoms/ErrorMessage";
-import { useUser, useSetUser } from "@/features/users/userContext";
+import { useUser, useSetUser } from "@/modules/userSettings/hooks/userContext";
 
 //translations
 import { useTranslations } from "next-intl";

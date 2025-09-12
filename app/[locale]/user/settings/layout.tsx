@@ -1,5 +1,5 @@
 import React from "react";
-import SettingsSidebar from "@/features/settings/SideBarMenu";
+import SettingsSidebar from "@/modules/homeSettings/components/SideBarMenu";
 
 export default function SettingsLayout({
   children,

@@ -11,7 +11,7 @@ import {
   uploadFileToStorage,
 } from "@/shared/services/firestore/firestore";
 
-import { Baby } from "./babyModel";
+import { Baby } from "../types/babyModel";
 
 /**
  * Baby service for interacting with Firestore and mock services.

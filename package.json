@@ -10,13 +10,16 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@hookform/resolvers": "^5.2.1",
     "firebase": "^12.2.1",
     "next": "15.5.2",
     "next-intl": "^4.3.5",
     "react": "19.1.0",
     "react-dom": "19.1.0",
+    "react-hook-form": "^7.62.0",
     "react-icons": "^5.5.0",
-    "react-idle-timer": "^5.7.2"
+    "react-idle-timer": "^5.7.2",
+    "yup": "^1.7.0"
   },
   "devDependencies": {
     "@babel/preset-react": "^7.27.1",

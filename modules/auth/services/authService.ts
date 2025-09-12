@@ -1,4 +1,4 @@
-import useMock from "../../config/useMock";
+import useMock from "../../../config/useMock";
 import {
   loginWithPopup,
   logout,
