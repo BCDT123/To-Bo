@@ -1,0 +1,11 @@
+{
+  "house": {
+    "house": "House",
+    "name": "Name",
+    "location": "Location",
+    "color": "Color",
+    "photoUrl": "Photo",
+    "size": "Size",
+    "register": "Register House"
+  }
+}

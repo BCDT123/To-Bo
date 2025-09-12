@@ -6,5 +6,6 @@ export interface NavItemData {
   icon?: ReactNode;
   isActive?: boolean;
   submenu?: NavItemData[];
+  showLabel?: boolean;
   onClick?: () => void;
 }

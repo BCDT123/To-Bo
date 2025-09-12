@@ -148,7 +148,7 @@ export default function UserProfileEdit() {
         />
 
         <div>
-          <h1 className="text-xl font-bold mb-4 text-center">
+          <h1 className="text-xl font-medium mb-4 text-center">
             {tProfile("editProfile")}
           </h1>
           <InputForm

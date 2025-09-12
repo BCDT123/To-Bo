@@ -13,6 +13,7 @@ import Submenu, { SubmenuMobile } from "./Submenu";
  *
  * Parameters:
  * @param {NavItemData} props - The navigation item data including href, label, icon, isActive, and optional submenu.
+ * @param {boolean} [showLabel] - Whether to show the label next to the icon.
  *
  * Returns:
  * @returns {JSX.Element} The navigation item element.
@@ -23,6 +24,7 @@ export default function NavItem({
   icon,
   isActive,
   submenu,
+  showLabel,
 }: NavItemData) {
   const [open, setOpen] = useState(false);
   const drawerRef = useRef<HTMLDivElement>(null);
@@ -59,11 +61,12 @@ export default function NavItem({
       <Link
         href={href || ""}
         aria-label={label}
-        className={`flex flex-col items-center justify-center text-sm ${
+        className={`flex flex-row items-center justify-center gap-2 text-sm ${
           isActive ? "text-gray-700" : "text-gray-400"
-        } hover:text-gray-700 active:text-gray-700`}
+        } hover:text-gray-700  active:text-gray-700`}
       >
         {icon}
+        {showLabel && <span className="font-medium">{label}</span>}
       </Link>
     );
   }
@@ -73,6 +76,7 @@ export default function NavItem({
     <div className="relative" ref={drawerRef}>
       <ButtonLink onClick={toggleSubmenu} label={label} isActive={isActive}>
         {icon}
+        {showLabel && <span className="font-medium">{label}</span>}
       </ButtonLink>
 
       {open && (
@@ -82,5 +86,40 @@ export default function NavItem({
         </>
       )}
     </div>
+  );
+}
+
+/**
+ * NavItemAside component
+ *
+ * Purpose:
+ * - Renders a navigation item for vertical sidebars, aligned to the left.
+ *
+ * Parameters:
+ * @param {NavItemData} props - The navigation item data including href, label, icon, isActive.
+ * @param {boolean} [showLabel] - Whether to show the label next to the icon.
+ *
+ * Returns:
+ * @returns {JSX.Element} The sidebar navigation item element.
+ */
+export function NavItemAside({
+  href,
+  label,
+  icon,
+  isActive,
+  showLabel,
+}: NavItemData) {
+  return (
+    <Link
+      href={href || ""}
+      aria-label={label}
+      className={`flex flex-row w-full text-left px-4 py-2 text-md gap-2
+     ${
+       isActive ? "text-gray-700" : "text-gray-400"
+     } hover:text-gray-700  hover:bg-gray-100 active:text-gray-700`}
+    >
+      {icon}
+      {showLabel && <span className="font-medium">{label}</span>}
+    </Link>
   );
 }

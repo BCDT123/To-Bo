@@ -6,7 +6,9 @@ import { AiFillHome } from "react-icons/ai";
 import { BiNews } from "react-icons/bi";
 import { RiAddBoxLine } from "react-icons/ri";
 import { FiUser } from "react-icons/fi";
+import { FaUser, FaBell } from "react-icons/fa";
 import { FaRegBell } from "react-icons/fa";
+import { RiAddBoxFill } from "react-icons/ri";
 import letterImg from "@/public/favicon/letter.png";
 
 import { NavItemData } from "@/types/props";
@@ -50,25 +52,26 @@ export default function NavigationBar({ pathname }: NavBarProps) {
     {
       href: "/add",
       label: tNavbar("add"),
-      icon: <RiAddBoxLine className="h-5 w-5" />,
+      icon: <RiAddBoxFill className="h-5 w-5" />,
       isActive: pathname.endsWith("/add"),
     },
     {
       href: "/alert",
       label: tNavbar("alert"),
-      icon: <FaRegBell className="h-5 w-5" />,
+      icon: <FaBell className="h-5 w-5" />,
       isActive: pathname.endsWith("/alert"),
     },
     {
       label: tNavbar("user"),
       href: "/user",
-      icon: <FiUser className="h-5 w-5" />,
+      icon: <FaUser className="h-5 w-5" />,
+      isActive: pathname.includes("/user"),
       submenu: [
         {
           label: tNavbar("profile"),
           onClick: () => setShowProfile(true),
         },
-        { label: tNavbar("settings"), href: "/settings" },
+        { label: tNavbar("settings"), href: "/user/settings" },
         { label: tNavbar("logout"), onClick: logout },
       ],
     },

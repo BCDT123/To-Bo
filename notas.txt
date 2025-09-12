@@ -18,7 +18,7 @@
   /middleware          → Middlewares (auth, logging, etc.)
   /tests               → Tests unitarios y de integración
 
-
+      
 
 //correr pruebas unitarias 
 npm test
@@ -29,3 +29,45 @@ npm install
 //correr app
 npm run dev
 
+Base de datos	Instancia	Funciones principales
+Realtime Database	getDatabase(app)=	ref(), set(), get()
+Firestore	getFirestore(app)	= collection(), getDocs()
+
+
+Usas Firestore directo para cosas en tiempo real (chat, notificaciones).
+Usas tu API para operaciones sensibles (crear usuarios, pagos, etc.).
+
+En mi codigo agrega con comentarios export, no borres los comentarios que hay, 
+en cambio traducelos al ingles. Incluye parametros y que retorna, 
+utiliza las mejores practicas para documentar codigo.(comentarios en ingles)
+
+# Estructura
+
+- app: se queda igual, estaria bien renombrar a routes.
+- shared: todo lo que se usa en varios modules.
+  - components
+    - atoms
+    - nav
+  - mocks
+  - hooks
+  - types
+  - services
+    - firestore
+    - user
+  - utilities: este era lib antes.
+- modules: secciones totalmente independientes.
+  - auth
+  - homeSettings
+  - userSettings
+    - components
+    - hooks
+    - services
+    - types
+- i18n
+  - languages
+
+# Notas
+
+- /tests se crean en una carpeta en la misma carpeta del elemento que se testea
+- /features se reordena en /modules
+- las pages de /app deben de ser lo más simple posible
