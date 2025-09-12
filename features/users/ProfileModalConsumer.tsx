@@ -1,7 +1,7 @@
 // Modal consumer component
 "use client";
 import React from "react";
-import Modal from "@/components/Modal";
+import Modal from "@/shared/components/atoms/Modal";
 import UserProfileEdit from "@/features/users/UserProfileEdit"; // Ajusta el import si es necesario
 
 import {

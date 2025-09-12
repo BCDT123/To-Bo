@@ -8,7 +8,7 @@ jest.mock("@/services/firestore/fetch", () => ({
 }));
 
 // Ahora puedes importar la función mockeada
-import { fetchCollection } from "@/services/firestore/fetch";
+import { fetchCollection } from "@/shared/services/firestore/fetch";
 
 describe("fetchCollection", () => {
   it("should return mock data", async () => {

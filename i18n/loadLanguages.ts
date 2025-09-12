@@ -13,7 +13,7 @@ import { namespaces } from "@/config/locales";
 export async function loadLanguage(locale: string) {
   const messages: Record<string, any> = {};
   for (const ns of namespaces) {
-    const module = await import(`@/languages/${locale}/${ns}.json`);
+    const module = await import(`@/i18n/languages/${locale}/${ns}.json`);
     Object.assign(messages, module.default);
   }
 

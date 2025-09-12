@@ -2,8 +2,8 @@
 import React, { useState } from "react";
 //components
 import { loginWithPopup } from "@/features/login/auth";
-import Button from "@/components/Button";
-import ErrorMessage from "@/components/ErrorMessage";
+import Button from "@/shared/components/atoms/Button";
+import ErrorMessage from "@/shared/components/atoms/ErrorMessage";
 import { useUser, useSetUser } from "@/features/users/userContext";
 //Translations
 import { useTranslations } from "next-intl";

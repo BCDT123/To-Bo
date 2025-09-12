@@ -1,6 +1,6 @@
 import { getRequestConfig } from "next-intl/server";
 import { supportedLocales, defaultLocale } from "@/config/locales";
-import { loadLanguage } from "@/lib/loadLanguages";
+import { loadLanguage } from "@/i18n/loadLanguages";
 
 /**
  * Checks if the received locale is supported.

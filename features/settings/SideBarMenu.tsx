@@ -2,7 +2,7 @@
 import React from "react";
 import { FaUserCog, FaHome, FaHouseUser } from "react-icons/fa";
 import { usePathname } from "next/navigation";
-import { NavItemAside } from "@/components/nav/NavItem";
+import { NavItemAside } from "@/shared/components/nav/NavItem";
 /**
  * SettingsSidebar component
  *

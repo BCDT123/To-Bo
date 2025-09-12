@@ -6,12 +6,12 @@ import { useUser, useSetUser } from "@/features/users/userContext";
 import { userService } from "@/features/users/userService";
 import { supportedLanguages } from "@/config/locales";
 // Components
-import ErrorMessage from "@/components/ErrorMessage";
-import { InputForm } from "@/components/Input";
-import Button from "@/components/Button";
-import { SelectForm } from "@/components/Input";
-import SuccessMessage from "@/components/SuccessMessage";
-import UserImageEdit from "@/components/UserImageEdit";
+import ErrorMessage from "@/shared/components/atoms/ErrorMessage";
+import { InputForm } from "@/shared/components/atoms/Input";
+import Button from "@/shared/components/atoms/Button";
+import { SelectForm } from "@/shared/components/atoms/Input";
+import SuccessMessage from "@/shared/components/atoms/SuccessMessage";
+import UserImageEdit from "@/shared/components/atoms/UserImageEdit";
 import { updateUserWithImage } from "@/features/users/userProfile";
 
 /**

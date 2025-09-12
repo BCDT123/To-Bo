@@ -1,4 +1,4 @@
-import { handleError } from "@/lib/errorHandler";
+import { handleError } from "@/shared/utilities/errorHandler";
 import { getUserDefault } from "@/features/users/userProfile";
 import { authService } from "./authService";
 

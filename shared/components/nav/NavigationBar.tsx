@@ -11,7 +11,7 @@ import { FaRegBell } from "react-icons/fa";
 import { RiAddBoxFill } from "react-icons/ri";
 import letterImg from "@/public/favicon/letter.png";
 
-import { NavItemData } from "@/types/props";
+import { NavItemData } from "@/shared/types/props";
 import { logout } from "@/features/login/auth";
 import { useTranslations } from "next-intl";
 import { useProfileModal } from "@/features/users/ProfileModalContext";

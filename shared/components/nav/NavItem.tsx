@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import Link from "next/link";
-import { NavItemData } from "@/types/props";
-import { ButtonLink } from "@/components/Button";
+import { NavItemData } from "@/shared/types/props";
+import { ButtonLink } from "@/shared/components/atoms/Button";
 import Submenu, { SubmenuMobile } from "./Submenu";
 
 /**

@@ -1,5 +1,5 @@
 import React from "react";
-import Button from "@/components/Button";
+import Button from "@/shared/components/atoms/Button";
 
 /**
  * IdleModal component

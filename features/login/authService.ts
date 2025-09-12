@@ -4,7 +4,7 @@ import {
   logout,
   signInWithEmail,
   newUserWithEmailAndPassword,
-} from "@/services/firestore/firestore";
+} from "@/shared/services/firestore/firestore";
 
 /**
  * Auth service for handling authentication logic.

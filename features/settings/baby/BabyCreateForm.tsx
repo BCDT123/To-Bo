@@ -2,11 +2,15 @@
 import React, { useState } from "react";
 import { babyService } from "./babyService";
 import { Baby } from "./babyModel";
-import { InputForm, SelectForm, ColorInput } from "@/components/Input";
-import Button from "@/components/Button";
+import {
+  InputForm,
+  SelectForm,
+  ColorInput,
+} from "@/shared/components/atoms/Input";
+import Button from "@/shared/components/atoms/Button";
 import { useTranslations } from "next-intl";
-import ErrorMessage from "@/components/ErrorMessage";
-import SuccessMessage from "@/components/SuccessMessage";
+import ErrorMessage from "@/shared/components/atoms/ErrorMessage";
+import SuccessMessage from "@/shared/components/atoms/SuccessMessage";
 /**
  * BabyCreateForm component
  *

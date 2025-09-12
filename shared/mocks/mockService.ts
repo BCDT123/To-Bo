@@ -1,4 +1,4 @@
-import mockData from "@/mocks/mockData";
+import mockData from "@/shared/mocks/mockData";
 
 // Funciones simuladas
 export const firestoreMock = {

@@ -1,5 +1,5 @@
 import { auth, provider } from "@/firebaseConfig";
-import { handleError } from "@/lib/errorHandler";
+import { handleError } from "@/shared/utilities/errorHandler";
 
 import {
   signInWithPopup,

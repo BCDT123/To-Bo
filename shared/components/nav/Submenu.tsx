@@ -1,7 +1,7 @@
-import { NavItemData } from "@/types/props";
+import { NavItemData } from "@/shared/types/props";
 import Link from "next/link";
 import React from "react";
-import { ButtonModalClose } from "@/components/Button";
+import { ButtonModalClose } from "@/shared/components/atoms/Button";
 import { IoMdClose } from "react-icons/io";
 
 /**

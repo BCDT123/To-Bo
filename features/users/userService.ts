@@ -1,5 +1,5 @@
 import useMock from "../../config/useMock";
-import { firestoreMock } from "../../mocks/mockServices/mockUserService";
+import { firestoreMock } from "@/shared/mocks/mockService";
 import { endpoints } from "../../config/endpoints";
 
 import {
@@ -9,7 +9,7 @@ import {
   updateDocument,
   deleteDocument,
   uploadFileToStorage,
-} from "@/services/firestore/firestore";
+} from "@/shared/services/firestore/firestore";
 
 import { User } from "@/features/users/userModel";
 

@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 
 //components
-import InputWithIcon from "@/components/Input";
-import Button from "@/components/Button";
+import InputWithIcon from "@/shared/components/atoms/Input";
+import Button from "@/shared/components/atoms/Button";
 import { signInWithEmail } from "@/features/login/auth";
-import ErrorMessage from "@/components/ErrorMessage";
+import ErrorMessage from "@/shared/components/atoms/ErrorMessage";
 import { useUser, useSetUser } from "@/features/users/userContext";
 
 //translations

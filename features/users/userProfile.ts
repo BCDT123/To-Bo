@@ -1,6 +1,6 @@
 import { userService } from "@/features/users/userService";
 import { User } from "./userModel";
-import { handleError } from "@/lib/errorHandler";
+import { handleError } from "@/shared/utilities/errorHandler";
 import { serverTimestamp } from "firebase/firestore";
 import { User as FirebaseUser } from "firebase/auth";
 
