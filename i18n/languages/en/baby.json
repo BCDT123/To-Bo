@@ -3,8 +3,17 @@
     "name": "Name",
     "gender": "Gender",
     "color": "Color",
-    "photoUrl": "Photo",
-    "birthday": "Birthday",
-    "register": "Register Baby"
+    "photo": "Photo",
+    "birthDate": "Birthdate",
+    "register": "Register Baby",
+    "male": "Male",
+    "female": "Female",
+    "babyList": "Baby List",
+    "editBaby": "Edit Baby",
+    "deleteBaby": "Delete Baby",
+    "noBabies": "No babies registered yet.",
+    "addBaby": "Add your first baby",
+    "selectBaby": "Select a baby to view details",
+    "old": "old"
   }
 }

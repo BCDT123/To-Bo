@@ -3,7 +3,7 @@ export interface Baby {
   gender: string;
   color: string;
   photoUrl: string;
-  birthday: Date;
+  birthDate: Date;
   name: string;
   createdAt: Date;
   updatedAt?: Date;

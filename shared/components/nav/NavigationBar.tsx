@@ -41,30 +41,30 @@ export default function NavigationBar({ pathname }: NavBarProps) {
       label: tNavbar("home"),
       href: "/",
       isActive: /^\/[a-z]{2}$/.test(pathname),
-      icon: <AiFillHome className="h-5 w-5" />,
+      icon: <AiFillHome size={20} />,
     },
     {
       href: "/feed",
       label: tNavbar("feed"),
-      icon: <BiNews className="h-5 w-5" />,
+      icon: <BiNews size={20} />,
       isActive: pathname.endsWith("/feed"),
     },
     {
       href: "/add",
       label: tNavbar("add"),
-      icon: <RiAddBoxFill className="h-5 w-5" />,
+      icon: <RiAddBoxFill size={20} />,
       isActive: pathname.endsWith("/add"),
     },
     {
       href: "/alert",
       label: tNavbar("alert"),
-      icon: <FaBell className="h-5 w-5" />,
+      icon: <FaBell size={20} />,
       isActive: pathname.endsWith("/alert"),
     },
     {
       label: tNavbar("user"),
       href: "/user",
-      icon: <FaUser className="h-5 w-5" />,
+      icon: <FaUser size={20} />,
       isActive: pathname.includes("/user"),
       submenu: [
         {

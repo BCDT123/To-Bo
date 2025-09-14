@@ -38,7 +38,7 @@ export default function Modal({ open, onClose, children }: ModalProps) {
         onClick={onClose}
       />
       {/* Modal aligned to the left, 1/3 width on md+, full screen on mobile */}
-      <div className="w-full h-full bg-white rounded-none md:rounded-r-lg shadow-lg relative flex flex-col max-w-none md:max-w-[33vw]">
+      <div className="w-full h-full bg-white rounded-none md:rounded-r-lg shadow-lg relative flex flex-col max-w-none md:max-w-[50vw] lg:max-w-[33vw]">
         <ButtonModalClose onClick={onClose}>
           <IoMdClose />
         </ButtonModalClose>

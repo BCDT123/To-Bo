@@ -22,7 +22,7 @@ export default function LoginPage() {
       </div>
 
       <div className="flex flex-col justify-center text-center">
-        <h1 className="text-lg font-semibold">{tAuth("createAccount")}</h1>
+        <h1 className="text-lg font-medium">{tAuth("createAccount")}</h1>
         <h2>{tAuth("addEmailMsg")}</h2>
       </div>
       <div className="flex flex-col gap-2 w-full">

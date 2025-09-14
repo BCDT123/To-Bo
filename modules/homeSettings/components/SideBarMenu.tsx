@@ -18,22 +18,22 @@ export default function SideBarMenu() {
 
   const navItems = [
     {
-      label: "Config Child",
-      href: "/settings/config-child",
-      icon: <FaUserCog className="h-5 w-5" />,
-      isActive: pathname.endsWith("/config-child"),
+      label: "My Houses",
+      href: "/user/settings",
+      icon: <FaHouseUser size={20} />,
+      isActive: pathname.endsWith("/user/settings"),
+    },
+    {
+      label: "Config Baby",
+      href: "/user/settings/baby",
+      icon: <FaUserCog size={20} />,
+      isActive: pathname.endsWith("/user/settings/baby"),
     },
     {
       label: "Config House",
       href: "/settings/config-house",
-      icon: <FaHome className="h-5 w-5" />,
+      icon: <FaHome size={20} />,
       isActive: pathname.endsWith("/config-house"),
-    },
-    {
-      label: "My House",
-      href: "/settings/my-house",
-      icon: <FaHouseUser className="h-5 w-5" />,
-      isActive: pathname.endsWith("/my-house"),
     },
   ];
 

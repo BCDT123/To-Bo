@@ -58,22 +58,27 @@ export default function NavItem({
   // If there is no submenu, render a simple navigation link
   if (!submenu) {
     return (
-      <Link
-        href={href || ""}
-        aria-label={label}
-        className={`flex flex-row items-center justify-center gap-2 text-sm ${
-          isActive ? "text-gray-700" : "text-gray-400"
-        } hover:text-gray-700  active:text-gray-700`}
-      >
-        {icon}
-        {showLabel && <span className="font-medium">{label}</span>}
-      </Link>
+      <div className="p-2 hover:bg-gray-100 rounded-full">
+        <Link
+          href={href || ""}
+          aria-label={label}
+          className={`flex flex-row items-center justify-center gap-2 text-sm ${
+            isActive ? "text-gray-700" : "text-gray-400"
+          } hover:text-gray-700  active:text-gray-700  `}
+        >
+          {icon}
+          {showLabel && <span className="font-medium">{label}</span>}
+        </Link>
+      </div>
     );
   }
 
   // If there is a submenu, render the button and submenu components
   return (
-    <div className="relative" ref={drawerRef}>
+    <div
+      className="relative p-2 hover:bg-gray-100 rounded-full"
+      ref={drawerRef}
+    >
       <ButtonLink onClick={toggleSubmenu} label={label} isActive={isActive}>
         {icon}
         {showLabel && <span className="font-medium">{label}</span>}

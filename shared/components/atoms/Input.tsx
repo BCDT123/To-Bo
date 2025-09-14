@@ -57,7 +57,7 @@ export function InputForm({
 
       <input
         {...props}
-        className={`outline-none ${
+        className={`min-w-0 truncate outline-none ${
           props.type === "checkbox"
             ? "accent-thistle"
             : "flex-1 text-gray-500 focus:text-gray-700"
@@ -106,11 +106,16 @@ export function SelectForm({
  *
  * Parameters:
  * @param {React.InputHTMLAttributes<HTMLInputElement>} props - Standard input props.
+ * @param {string} [color] - Optional color value to display in the circle.
  *
  * Returns:
  * @returns {JSX.Element} The custom color input element.
  */
-export function ColorInput(props: React.InputHTMLAttributes<HTMLInputElement>) {
+export function ColorInput(
+  props: React.InputHTMLAttributes<HTMLInputElement> & { color?: string }
+) {
+  const displayColor = props.color || (props.value as string) || "#BEB6D9"; // Default color
+
   return (
     <div className="flex items-center w-full p-3 border-t-1 border-gray-200 hover:bg-gray-100">
       <label htmlFor={props.name} className="min-w-30">
@@ -126,7 +131,7 @@ export function ColorInput(props: React.InputHTMLAttributes<HTMLInputElement>) {
         <div
           className="w-10 h-10 rounded-full border-2 border-gray-300"
           style={{
-            backgroundColor: props.value as string,
+            backgroundColor: displayColor,
             zIndex: 1,
           }}
         />
