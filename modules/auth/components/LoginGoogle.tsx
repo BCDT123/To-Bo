@@ -59,6 +59,7 @@ export default function LoginGoogle() {
   return (
     <>
       <Button
+        variant="primary"
         onClick={handleLogin}
         disabled={loading}
         aria-label="Login with Google"

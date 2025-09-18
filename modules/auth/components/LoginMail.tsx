@@ -83,7 +83,7 @@ export default function LoginMail() {
         placeholder="********"
         aria-label="Password"
       />
-      <Button onClick={handleContinue} disabled={loading}>
+      <Button variant="primary" onClick={handleContinue} disabled={loading}>
         {loading ? tCommon("loading") : tCommon("continue")}
       </Button>
       <ErrorMessage message={error} />

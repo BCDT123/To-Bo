@@ -1,22 +1,39 @@
 import React, { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { NavItemData } from "@/shared/types/props";
-import { ButtonLink } from "@/shared/components/atoms/Button";
-import Submenu, { SubmenuMobile } from "./Submenu";
+import { ButtonProps } from "@/shared/components/atoms/Button";
+import Submenu from "./Submenu";
 
 /**
- * NavItem component
+ * Props for UnifiedNavItem component.
+ *
+ * @property {string} href - The navigation link URL.
+ * @property {string} label - The label for the navigation item.
+ * @property {React.ReactNode} icon - The icon to display.
+ * @property {boolean} isActive - Indicates if the nav item is active.
+ * @property {any} [submenu] - Optional submenu data.
+ * @property {boolean} [showLabel] - Whether to show the label next to the icon.
+ * @property {"primary" | "secondary" | "tertiary"} [variant] - Visual style of the nav item.
+ * @property {"left" | "center" | "right"} [align] - Alignment of the nav item content.
+ */
+export type NavItemProps = NavItemData & {
+  variant?: "primary" | "secondary" | "tertiary";
+  align?: "left" | "center" | "right";
+  showLabel?: boolean;
+};
+
+/**
+ * Exported UnifiedNavItem component.
  *
  * Purpose:
- * - Renders a navigation item, which can be a simple link or a menu with a submenu.
- * - Handles submenu open/close logic and click outside detection.
+ * - Renders a navigation item with unified styles similar to UnifiedButton.
+ * - Supports submenu, active state, and content alignment.
  *
  * Parameters:
- * @param {NavItemData} props - The navigation item data including href, label, icon, isActive, and optional submenu.
- * @param {boolean} [showLabel] - Whether to show the label next to the icon.
+ * @param {NavItemProps} props - Navigation item props.
  *
  * Returns:
- * @returns {JSX.Element} The navigation item element.
+ * @returns {JSX.Element} The styled navigation item element.
  */
 export default function NavItem({
   href,
@@ -25,15 +42,39 @@ export default function NavItem({
   isActive,
   submenu,
   showLabel,
-}: NavItemData) {
+  variant = "tertiary",
+  align = "center",
+}: NavItemProps): JSX.Element {
   const [open, setOpen] = useState(false);
   const drawerRef = useRef<HTMLDivElement>(null);
 
-  // Closes the submenu if a click occurs outside the drawer
+  // Alignment classes for nav item content
+  const alignments: Record<NonNullable<ButtonProps["align"]>, string> = {
+    left: "justify-start",
+    center: "justify-center",
+    right: "justify-end",
+  };
+
+  // Base styles for nav item
+  const baseStyles =
+    "flex flex-row items-center gap-2 rounded-full cursor-pointer font-medium tracking-widest uppercase transition-transform duration-300 ease-in-out transform hover:scale-105 focus:outline-none p-2";
+  // Base styles for submenu trigger
+  const baseStylesSubmenu =
+    "flex flex-row items-center gap-2 rounded-full cursor-pointer font-medium tracking-widest uppercase focus:outline-none p-2";
+  // Variant styles for nav item
+  const variants: Record<string, string> = {
+    primary: "hover:bg-thistle hover:text-white",
+    secondary:
+      "bg-white text-thistle border border-thistle hover:bg-thistle/10 active:bg-thistle/20",
+    tertiary: "bg-transparent hover:text-thistle active:text-thistle/80",
+  };
+
+  /**
+   * Effect: Closes the submenu if a click occurs outside the drawer.
+   */
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
-
       // If the click was outside the drawer and not on a link
       if (
         drawerRef.current &&
@@ -49,24 +90,26 @@ export default function NavItem({
   }, []);
 
   /**
-   * Toggles the submenu open/close state
+   * Toggles the submenu open/close state.
+   *
+   * @returns {void}
    */
   const toggleSubmenu = () => {
     if (submenu) setOpen((prev) => !prev);
   };
 
-  // If there is no submenu, render a simple navigation link
+  // Renders a simple navigation link if there is no submenu
   if (!submenu) {
     return (
       <div
-        className={`p-2  hover:bg-thistle/50 rounded-full  ${
+        className={`${baseStyles} ${variants[variant]} ${alignments[align]} ${
           isActive ? "text-gray-700" : "text-gray-400"
-        } hover:text-gray-700  active:text-gray-700  `}
+        }`}
       >
         <Link
           href={href || ""}
           aria-label={label}
-          className={`flex flex-row items-center justify-center gap-2 text-sm `}
+          className="flex flex-row items-center gap-2 text-sm"
         >
           {icon}
           {showLabel && <span className="font-medium">{label}</span>}
@@ -75,23 +118,35 @@ export default function NavItem({
     );
   }
 
-  // If there is a submenu, render the button and submenu components
+  // Renders the button and submenu components if there is a submenu
   return (
     <div
-      className={`relative p-2 hover:bg-thistle/50 rounded-full ${
-        isActive ? "text-gray-700" : "text-gray-400"
-      } hover:text-gray-700  active:text-gray-700  `}
+      className={`relative ${baseStylesSubmenu} ${variants[variant]} ${
+        alignments[align]
+      } ${isActive ? "text-gray-700" : "text-gray-400"}`}
       ref={drawerRef}
     >
-      <ButtonLink onClick={toggleSubmenu} label={label} isActive={isActive}>
+      <button
+        onClick={toggleSubmenu}
+        aria-label={label}
+        className={`flex flex-col items-center justify-center text-sm focus:outline-none`}
+      >
         {icon}
-        {showLabel && <span className="font-medium">{label}</span>}
-      </ButtonLink>
+        {showLabel && (
+          <span className="font-medium cursor-pointer">{label}</span>
+        )}
+      </button>
 
       {open && (
         <>
+          {/* Desktop submenu */}
           <Submenu menu={submenu} onClick={() => setOpen(false)} />
-          <SubmenuMobile menu={submenu} onClick={() => setOpen(false)} />
+          {/* Mobile submenu */}
+          <Submenu
+            mobile={true}
+            menu={submenu}
+            onClick={() => setOpen(false)}
+          />
         </>
       )}
     </div>
@@ -99,36 +154,14 @@ export default function NavItem({
 }
 
 /**
- * NavItemAside component
- *
- * Purpose:
- * - Renders a navigation item for vertical sidebars, aligned to the left.
- *
- * Parameters:
- * @param {NavItemData} props - The navigation item data including href, label, icon, isActive.
- * @param {boolean} [showLabel] - Whether to show the label next to the icon.
- *
- * Returns:
- * @returns {JSX.Element} The sidebar navigation item element.
+ * Usage Example:
+ * <UnifiedNavItem
+ *   href="/dashboard"
+ *   label="Dashboard"
+ *   icon={<DashboardIcon />}
+ *   isActive={true}
+ *   variant="primary"
+ *   align="center"
+ *   showLabel
+ * />
  */
-export function NavItemAside({
-  href,
-  label,
-  icon,
-  isActive,
-  showLabel,
-}: NavItemData) {
-  return (
-    <Link
-      href={href || ""}
-      aria-label={label}
-      className={`flex flex-row w-full text-left px-4 py-2 text-md gap-2
-     ${
-       isActive ? "text-gray-700" : "text-gray-400"
-     } hover:text-gray-700  hover:bg-thistle/50 active:text-gray-700`}
-    >
-      {icon}
-      {showLabel && <span className="font-medium text-sm">{label}</span>}
-    </Link>
-  );
-}

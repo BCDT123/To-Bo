@@ -1,5 +1,6 @@
 import React from "react";
 import Overlay from "./Overlay";
+import { ButtonRoundIcon } from "./atoms/Button";
 
 export type MenuIconProps = {
   open: boolean;
@@ -20,13 +21,12 @@ export default function MenuModalIcon({
 }: MenuIconProps) {
   return (
     <div className={`relative ${className}`}>
-      <button
-        type="button"
-        className="p-2 rounded-full hover:bg-thistle/50"
+      <ButtonRoundIcon
         onClick={open ? onClose : onOpen}
+        className="absolute top-0 right-0 "
       >
         {icon}
-      </button>
+      </ButtonRoundIcon>
       {open && (
         <>
           <Overlay onClick={onClose} />

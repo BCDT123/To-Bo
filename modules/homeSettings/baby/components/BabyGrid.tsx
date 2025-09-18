@@ -6,7 +6,7 @@ import { useTranslations } from "next-intl";
 import BabyCard from "./BabyCard";
 import { RiAddBoxFill } from "react-icons/ri";
 import LoadingSpin from "@/shared/components/atoms/LoadingSpin";
-
+import Button, { ButtonRoundIcon } from "@/shared/components/atoms/Button";
 /**
  * Props for BabyGrid component.
  *
@@ -78,14 +78,13 @@ export default function BabyGrid({
         <div className="w-full">
           <div className="flex items-center mb-5 gap-2">
             <h2 className="text-lg font-medium">{tBaby("babyList")}</h2>
-            <button
+            <ButtonRoundIcon
               aria-label="Add baby"
-              className="text-gray-400 hover:text-gray-700 rounded-full hover:bg-thistle/50 p-2"
               onClick={onAddBaby}
               type="button"
             >
               <RiAddBoxFill size={20} />
-            </button>
+            </ButtonRoundIcon>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
             {babies.map((baby) => (

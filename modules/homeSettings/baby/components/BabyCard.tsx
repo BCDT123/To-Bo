@@ -6,7 +6,7 @@ import image from "@/public/images/default-profile.png";
 import BabyAgeLabel from "@/modules/homeSettings/baby/components/BabyAgeLabel";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
-
+import Button from "@/shared/components/atoms/Button";
 /**
  * Props for BabyCard component.
  *
@@ -69,7 +69,7 @@ export default function BabyCard({
   };
 
   return (
-    <div key={key} className="relative flex flex-col p-4 shadow-sm">
+    <div key={key} className=" relative flex flex-col p-4 shadow-sm">
       {/* Menu icon */}
       <div className="absolute top-2 right-0">
         <MenuModalIcon
@@ -78,18 +78,23 @@ export default function BabyCard({
           onClose={() => setMenuOpen(null)}
           icon={<MdMoreVert size={22} />}
         >
-          <button
-            className="flex items-center gap-2 w-full px-4 py-2 text-sm hover:bg-thistle/50 text-left hover:text-gray-700  active:text-gray-700"
+          <Button
+            variant="tertiary"
             onClick={handleEdit}
+            className="text-sm "
+            align="left"
           >
             <MdEdit size={18} /> {t("edit")}
-          </button>
-          <button
-            className="flex items-center gap-2 w-full px-4 py-2 text-sm hover:bg-thistle/50 text-left hover:text-gray-700  active:text-gray-700"
+          </Button>
+
+          <Button
+            variant="tertiary"
             onClick={handleDelete}
+            className="text-sm"
+            align="left"
           >
             <MdDelete size={18} /> {t("delete")}
-          </button>
+          </Button>
         </MenuModalIcon>
       </div>
       {/* Card content */}

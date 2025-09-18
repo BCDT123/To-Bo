@@ -5,6 +5,7 @@ import { BsFillHouseGearFill } from "react-icons/bs";
 import { usePathname } from "next/navigation";
 import { NavItemAside } from "@/shared/components/nav/NavItem";
 import { useTranslations } from "use-intl";
+import NavItem from "@/shared/components/nav/NavItem";
 /**
  * SettingsSidebar component
  *
@@ -42,11 +43,21 @@ export default function SideBarMenu() {
   return (
     <aside
       aria-label="Settings sidebar"
-      className="fixed left-0 top-0 md:top-16 h-screen w-40 bg-white shadow-lg flex flex-col items-center py-8 z-30"
+      className="fixed left-0 top-0 md:top-16 h-screen w-50 bg-white shadow-lg flex flex-col items-center py-8 z-30"
     >
       <nav role="navigation" className="flex flex-col w-full">
         {navItems.map((item) => {
-          return <NavItemAside key={item.href} {...item} showLabel />;
+          // return <NavItemAside key={item.href} {...item} showLabel />;
+
+          return (
+            <NavItem
+              key={item.href}
+              variant="tertiary"
+              align="left"
+              {...item}
+              showLabel
+            />
+          );
         })}
       </nav>
     </aside>

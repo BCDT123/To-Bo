@@ -111,7 +111,7 @@ export default function UserProfileEdit() {
    * Renders the user profile edit form section
    */
   return (
-    <section className="max-w-md mx-auto h-full">
+    <section className="max-w-lg mx-auto p-6 h-full">
       <FormField
         fields={fields}
         schema={userProfileSchema}

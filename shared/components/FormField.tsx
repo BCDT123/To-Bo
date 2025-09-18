@@ -1,6 +1,7 @@
 import React, { forwardRef, useImperativeHandle } from "react";
 import { useYupForm } from "@/shared/utilities/formValidation";
 import ErrorMessage from "@/shared/components/atoms/ErrorMessage";
+//import Button from "@/shared/components/atoms/Button";
 import Button from "@/shared/components/atoms/Button";
 import {
   InputForm,
@@ -192,9 +193,10 @@ const FormField = forwardRef(function FormField<T>(
       </div>
       <div className="flex-1 flex items-end w-full">
         <Button
+          variant="primary"
           type="submit"
-          className=" disabled:bg-gray-300"
           disabled={isSubmitting || !isDirty}
+          className="w-full"
         >
           {buttonLabel}
         </Button>

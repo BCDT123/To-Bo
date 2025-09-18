@@ -43,8 +43,12 @@ export default function IdleModal({
           </span>
         </p>
         <div className="flex justify-center gap-4">
-          <Button onClick={onStayActive}>{tCommon("close")}</Button>
-          <Button onClick={onLogout}>{tAuth("logout")}</Button>
+          <Button variant="primary" onClick={onStayActive}>
+            {tCommon("close")}
+          </Button>
+          <Button variant="primary" onClick={onLogout}>
+            {tAuth("logout")}
+          </Button>
         </div>
       </div>
     </div>

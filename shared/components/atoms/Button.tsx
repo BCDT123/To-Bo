@@ -1,47 +1,82 @@
 import React, { ReactNode } from "react";
 
 /**
- * Props for Button components
+ * Props for UnifiedButton component.
+ *
  * @property {ReactNode} children - Content to render inside the button.
+ * @property {"primary" | "secondary" | "tertiary"} variant - Visual style of the button.
+ * @property {"left" | "center" | "right"} align - Alignment of the button content.
  * @property {() => void} [onClick] - Optional click handler.
- * @property {boolean} [isActive] - Indicates if the button is active (for ButtonLink).
- * @property {string} [label] - Optional aria-label for accessibility.
+ * @property {string} [className] - Optional CSS class for styling.
  * @property {boolean} [disabled] - Indicates if the button is disabled.
+ * @property {string} [type] - Button type, defaults to "button".
+ * @property {string} [ariaLabel] - Accessibility label.
  */
-type ButtonProps = {
+export type ButtonProps = {
   children: ReactNode;
+  variant?: "primary" | "secondary" | "tertiary";
+  align?: "left" | "center" | "right";
   onClick?: () => void;
-  isActive?: boolean;
-  label?: string;
+  className?: string;
   disabled?: boolean;
+  type?: "button" | "submit" | "reset";
+  ariaLabel?: string;
 };
 
 /**
- * Button component
+ * Exported UnifiedButton component.
  *
  * Purpose:
- * - Renders a styled button for general actions.
+ * - Renders a scalable button with unified styles for primary, secondary, and tertiary variants.
+ * - Supports content alignment: left, center, or right.
  *
  * Parameters:
- * @param {ButtonProps & React.InputHTMLAttributes<HTMLInputElement>} props - Button props and standard input attributes.
+ * @param {ButtonProps & React.ButtonHTMLAttributes<HTMLButtonElement>} props - Button props and standard button attributes.
  *
  * Returns:
  * @returns {JSX.Element} The styled button element.
  */
 export default function Button({
   children,
+  variant = "primary",
+  align = "center",
   onClick,
-  disabled,
+  className = "",
+  disabled = false,
+  type = "button",
+  ariaLabel,
   ...props
-}: ButtonProps & React.ButtonHTMLAttributes<HTMLButtonElement>) {
+}: ButtonProps &
+  React.ButtonHTMLAttributes<HTMLButtonElement>): React.ReactElement {
+  // Alignment classes
+  const alignments: Record<NonNullable<ButtonProps["align"]>, string> = {
+    left: "justify-start",
+    center: "justify-center",
+    right: "justify-end",
+  };
+
+  // Unified style definitions for each variant
+  const baseStyles =
+    "flex flex-row items-center gap-2 rounded-lg cursor-pointer font-medium tracking-widest uppercase  transition-transform duration-300 ease-in-out transform hover:scale-105 focus:outline-none p-3 disabled:bg-gray-300";
+
+  const variants: Record<string, string> = {
+    primary: "bg-thistle text-white hover:bg-thistle/90 active:bg-thistle/80",
+    secondary:
+      "bg-white text-thistle border border-thistle hover:bg-thistle/10 active:bg-thistle/20",
+    tertiary:
+      "bg-transparent text-gray-700 hover:text-thistle active:text-thistle/80",
+  };
+
   return (
     <button
+      type={type}
       onClick={onClick}
       disabled={disabled}
-      className={`flex flex-row w-full justify-center items-center gap-2 rounded-lg cursor-pointer text-white font-medium bg-thistle tracking-widest uppercase px-4 py-3 
-      hover:bg-thistle/90 transition-transform duration-300 ease-in-out transform hover:scale-105 ${
-        props.className ?? ""
-      }`}
+      aria-label={ariaLabel}
+      className={`${baseStyles} ${alignments[align]} ${
+        variants[variant]
+      } ${className} ${disabled ? "opacity-50 cursor-not-allowed" : ""}`}
+      {...props}
     >
       {children}
     </button>
@@ -49,92 +84,29 @@ export default function Button({
 }
 
 /**
- * ButtonLink component
- *
- * Purpose:
- * - Renders a button styled as a navigation link.
- *
- * Parameters:
- * @param {ButtonProps} props - Button props including children, onClick, isActive, and label.
- *
- * Returns:
- * @returns {JSX.Element} The navigation link button element.
+ * Usage Example:
+ * <Button variant="primary" align="center">Primary</Button>
+ * <Button variant="secondary" align="left">Secondary</Button>
+ * <Button variant="tertiary" align="right">Tertiary</Button>
  */
-export function ButtonLink({
-  children,
-  onClick,
-  isActive,
-  label,
-}: ButtonProps) {
-  return (
-    <button
-      onClick={onClick}
-      aria-label={label}
-      className={`flex flex-col items-center justify-center text-sm focus:outline-none`}
-      //    ${
-      //   isActive ? "text-gray-700" : "text-gray-300"
-      // } hover:text-gray-700 active:text-gray-700`}
-    >
-      {children}
-    </button>
-  );
-}
 
-/**
- * ButtonModalClose component
- *
- * Purpose:
- * - Renders a button for closing modals, positioned in the top-right corner.
- *
- * Parameters:
- * @param {ButtonProps & React.InputHTMLAttributes<HTMLInputElement>} props - Button props and standard input attributes.
- *
- * Returns:
- * @returns {JSX.Element} The modal close button element.
- */
-export function ButtonModalClose({
+export function ButtonRoundIcon({
   children,
+  className = "",
   onClick,
   ...props
 }: ButtonProps & React.ButtonHTMLAttributes<HTMLButtonElement>) {
   return (
     <button
+      type="button"
       onClick={onClick}
-      className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 text-2xl"
+      className={`text-2xl hover:bg-thistle hover:rounded-full p-2 hover:text-white disabled:bg-gray-300 cursor-pointer   transition-transform duration-300 ease-in-out transform hover:scale-105  ${className}`}
+      {...props}
     >
       {children}
     </button>
   );
 }
 
-/**
- * Button component
- *
- * Purpose:
- * - Renders a styled button for general actions.
- *
- * Parameters:
- * @param {ButtonProps & React.InputHTMLAttributes<HTMLInputElement>} props - Button props and standard input attributes.
- *
- * Returns:
- * @returns {JSX.Element} The styled button element.
- */
-export function ButtonSmall({
-  children,
-  onClick,
-  disabled,
-  ...props
-}: ButtonProps & React.ButtonHTMLAttributes<HTMLButtonElement>) {
-  return (
-    <button
-      onClick={onClick}
-      disabled={disabled}
-      className={`flex flex-row justify-center items-center gap-2 rounded-lg cursor-pointer text-white bg-thistle tracking-widest uppercase p-2 
-      hover:bg-thistle/90 transition-transform duration-300 ease-in-out transform hover:scale-105 ${
-        props.className ?? ""
-      }`}
-    >
-      {children}
-    </button>
-  );
-}
+// absolute top-4 right-4
+// absolute top-2

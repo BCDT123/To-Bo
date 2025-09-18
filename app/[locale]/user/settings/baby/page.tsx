@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import BabyForm from "@/modules/homeSettings/baby/components/BabyForm";
 import BabyGrid from "@/modules/homeSettings/baby/components/BabyGrid";
-import Modal from "@/shared/components/atoms/Modal";
+import Modal from "@/shared/components/ModalLeft";
 import Overlay from "@/shared/components/Overlay";
 import { Baby } from "@/modules/homeSettings/baby/types/babyModel";
 import { babyService } from "@/modules/homeSettings/baby/services/babyService";

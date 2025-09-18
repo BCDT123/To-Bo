@@ -1,13 +1,9 @@
 import React from "react";
-import NavItem from "./NavItem";
 import Image from "next/image";
 // Icons
 import { AiFillHome } from "react-icons/ai";
 import { BiNews } from "react-icons/bi";
-import { RiAddBoxLine } from "react-icons/ri";
-import { FiUser } from "react-icons/fi";
 import { FaUser, FaBell } from "react-icons/fa";
-import { FaRegBell } from "react-icons/fa";
 import { RiAddBoxFill } from "react-icons/ri";
 import letterImg from "@/public/favicon/letter.png";
 
@@ -15,7 +11,7 @@ import { NavItemData } from "@/shared/types/props";
 import { logout } from "@/modules/auth/services/auth";
 import { useTranslations } from "next-intl";
 import { useProfileModal } from "@/modules/userSettings/hooks/ProfileModalContext";
-
+import NavItem from "@/shared/components/nav/NavItem";
 /**
  * NavigationBar component
  *
@@ -99,7 +95,17 @@ export default function NavigationBar({ pathname }: NavBarProps) {
       {showProfile ? null : (
         <div className="flex justify-around w-full md:w-auto md:gap-6">
           {navItems.map((item) => (
-            <NavItem key={item.href} {...item} />
+            //<NavItem key={item.href} {...item} />
+            <NavItem
+              key={item.href}
+              href={item.href}
+              icon={item.icon}
+              isActive={item.isActive}
+              variant="primary"
+              align="left"
+              showLabel={false}
+              {...item}
+            />
           ))}
         </div>
       )}

@@ -1,7 +1,7 @@
 import React from "react";
-import { ButtonModalClose } from "./Button";
+import { ButtonModalClose } from "./atoms/Button";
 import { IoMdClose } from "react-icons/io";
-
+import { ButtonRoundIcon } from "@/shared/components/atoms/Button";
 /**
  * Props for Modal
  * @property {boolean} open - Indicates if the modal is visible.
@@ -28,7 +28,7 @@ interface ModalProps {
  * Returns:
  * @returns {JSX.Element | null} The modal element if open, otherwise null.
  */
-export default function Modal({ open, onClose, children }: ModalProps) {
+export default function ModalLeft({ open, onClose, children }: ModalProps) {
   if (!open) return null;
   return (
     <div className="fixed inset-0 z-50 flex">
@@ -39,9 +39,9 @@ export default function Modal({ open, onClose, children }: ModalProps) {
       />
       {/* Modal aligned to the left, 1/3 width on md+, full screen on mobile */}
       <div className="w-full h-full bg-white rounded-none md:rounded-r-lg shadow-lg relative flex flex-col max-w-none md:max-w-[50vw] lg:max-w-[33vw]">
-        <ButtonModalClose onClick={onClose}>
+        <ButtonRoundIcon onClick={onClose} className="absolute top-4 right-4">
           <IoMdClose />
-        </ButtonModalClose>
+        </ButtonRoundIcon>
         <div className="p-6 overflow-y-auto h-full">{children}</div>
       </div>
     </div>
