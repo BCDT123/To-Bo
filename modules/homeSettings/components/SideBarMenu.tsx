@@ -1,8 +1,10 @@
 "use client";
 import React from "react";
 import { FaUserCog, FaHome, FaHouseUser } from "react-icons/fa";
+import { BsFillHouseGearFill } from "react-icons/bs";
 import { usePathname } from "next/navigation";
 import { NavItemAside } from "@/shared/components/nav/NavItem";
+import { useTranslations } from "use-intl";
 /**
  * SettingsSidebar component
  *
@@ -15,34 +17,37 @@ import { NavItemAside } from "@/shared/components/nav/NavItem";
  */
 export default function SideBarMenu() {
   const pathname = usePathname();
-
+  const t = useTranslations("sidebar");
   const navItems = [
     {
-      label: "My Houses",
+      label: t("myHouses"),
       href: "/user/settings",
       icon: <FaHouseUser size={20} />,
       isActive: pathname.endsWith("/user/settings"),
     },
     {
-      label: "Config Baby",
+      label: t("configBaby"),
       href: "/user/settings/baby",
       icon: <FaUserCog size={20} />,
       isActive: pathname.endsWith("/user/settings/baby"),
     },
     {
-      label: "Config House",
-      href: "/settings/config-house",
-      icon: <FaHome size={20} />,
-      isActive: pathname.endsWith("/config-house"),
+      label: t("configHouse"),
+      href: "/user/settings/house",
+      icon: <BsFillHouseGearFill size={20} />,
+      isActive: pathname.endsWith("/user/settings/house"),
     },
   ];
 
   return (
-    <aside className="fixed left-0 top-0 md:top-16 h-screen w-56 bg-white shadow-lg flex flex-col items-center py-8 z-40">
-      <nav className="flex flex-col w-full">
-        {navItems.map((item) => (
-          <NavItemAside key={item.href} {...item} showLabel={true} />
-        ))}
+    <aside
+      aria-label="Settings sidebar"
+      className="fixed left-0 top-0 md:top-16 h-screen w-40 bg-white shadow-lg flex flex-col items-center py-8 z-30"
+    >
+      <nav role="navigation" className="flex flex-col w-full">
+        {navItems.map((item) => {
+          return <NavItemAside key={item.href} {...item} showLabel />;
+        })}
       </nav>
     </aside>
   );

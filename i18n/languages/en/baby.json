@@ -14,6 +14,7 @@
     "noBabies": "No babies registered yet.",
     "addBaby": "Add your first baby",
     "selectBaby": "Select a baby to view details",
-    "old": "old"
+    "old": "old",
+    "unknownAge": "Unknown age"
   }
 }

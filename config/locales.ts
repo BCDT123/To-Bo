@@ -8,6 +8,7 @@ export const namespaces = [
   "profile",
   "baby",
   "house",
+  "sidebar",
 ];
 export const supportedLanguages = {
   en: "English",

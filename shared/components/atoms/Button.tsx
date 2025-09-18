@@ -33,7 +33,7 @@ export default function Button({
   onClick,
   disabled,
   ...props
-}: ButtonProps & React.InputHTMLAttributes<HTMLInputElement>) {
+}: ButtonProps & React.ButtonHTMLAttributes<HTMLButtonElement>) {
   return (
     <button
       onClick={onClick}
@@ -70,9 +70,10 @@ export function ButtonLink({
     <button
       onClick={onClick}
       aria-label={label}
-      className={`flex flex-col items-center justify-center text-sm focus:outline-none ${
-        isActive ? "text-gray-700" : "text-gray-300"
-      } hover:text-gray-700 active:text-gray-700`}
+      className={`flex flex-col items-center justify-center text-sm focus:outline-none`}
+      //    ${
+      //   isActive ? "text-gray-700" : "text-gray-300"
+      // } hover:text-gray-700 active:text-gray-700`}
     >
       {children}
     </button>
@@ -95,7 +96,7 @@ export function ButtonModalClose({
   children,
   onClick,
   ...props
-}: ButtonProps & React.InputHTMLAttributes<HTMLInputElement>) {
+}: ButtonProps & React.ButtonHTMLAttributes<HTMLButtonElement>) {
   return (
     <button
       onClick={onClick}
@@ -123,7 +124,7 @@ export function ButtonSmall({
   onClick,
   disabled,
   ...props
-}: ButtonProps & React.InputHTMLAttributes<HTMLInputElement>) {
+}: ButtonProps & React.ButtonHTMLAttributes<HTMLButtonElement>) {
   return (
     <button
       onClick={onClick}

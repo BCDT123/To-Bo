@@ -35,7 +35,7 @@ export default function Submenu({ menu, onClick }: NavBarProps) {
           key={item.label}
           href={item.href || ""}
           aria-label={item.label}
-          className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+          className="block w-full text-left px-4 py-2 font-medium text-sm text-gray-700 hover:bg-thistle/50 hover:text-gray-900"
           onClick={() => {
             // Brief delay to allow the browser to process the link navigation
             if (item.onClick) {
@@ -75,7 +75,7 @@ export function SubmenuMobile({ menu, onClick }: NavBarProps) {
           key={item.label}
           href={item.href || ""}
           aria-label={item.label}
-          className="text-gray-700 hover:text-blue-600"
+          className="text-gray-700 font-medium hover:text-thistle"
           onClick={() => {
             if (item.onClick) {
               item.onClick();

@@ -58,13 +58,15 @@ export default function NavItem({
   // If there is no submenu, render a simple navigation link
   if (!submenu) {
     return (
-      <div className="p-2 hover:bg-gray-100 rounded-full">
+      <div
+        className={`p-2  hover:bg-thistle/50 rounded-full  ${
+          isActive ? "text-gray-700" : "text-gray-400"
+        } hover:text-gray-700  active:text-gray-700  `}
+      >
         <Link
           href={href || ""}
           aria-label={label}
-          className={`flex flex-row items-center justify-center gap-2 text-sm ${
-            isActive ? "text-gray-700" : "text-gray-400"
-          } hover:text-gray-700  active:text-gray-700  `}
+          className={`flex flex-row items-center justify-center gap-2 text-sm `}
         >
           {icon}
           {showLabel && <span className="font-medium">{label}</span>}
@@ -76,7 +78,9 @@ export default function NavItem({
   // If there is a submenu, render the button and submenu components
   return (
     <div
-      className="relative p-2 hover:bg-gray-100 rounded-full"
+      className={`relative p-2 hover:bg-thistle/50 rounded-full ${
+        isActive ? "text-gray-700" : "text-gray-400"
+      } hover:text-gray-700  active:text-gray-700  `}
       ref={drawerRef}
     >
       <ButtonLink onClick={toggleSubmenu} label={label} isActive={isActive}>
@@ -121,10 +125,10 @@ export function NavItemAside({
       className={`flex flex-row w-full text-left px-4 py-2 text-md gap-2
      ${
        isActive ? "text-gray-700" : "text-gray-400"
-     } hover:text-gray-700  hover:bg-gray-100 active:text-gray-700`}
+     } hover:text-gray-700  hover:bg-thistle/50 active:text-gray-700`}
     >
       {icon}
-      {showLabel && <span className="font-medium">{label}</span>}
+      {showLabel && <span className="font-medium text-sm">{label}</span>}
     </Link>
   );
 }

@@ -9,7 +9,7 @@ export default function SettingsLayout({
   return (
     <div className="flex min-h-screen">
       <SettingsSidebar />
-      <main className="flex-1 ml-56 p-8">{children}</main>
+      <main className="flex-1 ml-40 p-8">{children}</main>
     </div>
   );
 }

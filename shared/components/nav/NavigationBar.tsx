@@ -80,7 +80,7 @@ export default function NavigationBar({ pathname }: NavBarProps) {
   return (
     <nav
       role="navigation"
-      className="fixed w-full bg-white shadow-sm z-50 flex items-center justify-between px-4 py-2
+      className="fixed w-full bg-white shadow-sm z-40 flex items-center justify-between px-4 py-2
                  bottom-0 h-12
                  md:top-0 md:bottom-auto md:h-16"
     >

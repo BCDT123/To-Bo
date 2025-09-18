@@ -49,7 +49,7 @@ export function InputForm({
   icon?: React.ReactNode;
 } & React.InputHTMLAttributes<HTMLInputElement>) {
   return (
-    <div className="flex items-center w-full p-3 border-t-1 border-gray-200 hover:bg-gray-100">
+    <div className="flex items-center w-full p-3 border-t-1 border-gray-200 hover:bg-thistle/50">
       <label htmlFor={props.name} className="min-w-30">
         {props.placeholder}:
       </label>
@@ -86,7 +86,7 @@ export function SelectForm({
   ...props
 }: {} & React.InputHTMLAttributes<HTMLSelectElement>) {
   return (
-    <div className="flex items-center w-full p-3 border-t-1 border-gray-200 hover:bg-gray-100">
+    <div className="flex items-center w-full p-3 border-t-1 border-gray-200 hover:bg-thistle/50">
       <label htmlFor={props.name} className="min-w-30">
         {props.placeholder}:
       </label>
@@ -117,7 +117,7 @@ export function ColorInput(
   const displayColor = props.color || (props.value as string) || "#BEB6D9"; // Default color
 
   return (
-    <div className="flex items-center w-full p-3 border-t-1 border-gray-200 hover:bg-gray-100">
+    <div className="flex items-center w-full p-3 border-t-1 border-gray-200 hover:bg-thistle/50">
       <label htmlFor={props.name} className="min-w-30">
         {props.placeholder}:
       </label>

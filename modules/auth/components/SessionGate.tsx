@@ -4,8 +4,7 @@ import { useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { auth } from "@/firebaseConfig";
 import type { User } from "firebase/auth";
-import { AiOutlineLoading3Quarters } from "react-icons/ai";
-
+import LoadingSpin from "@/shared/components/atoms/LoadingSpin";
 /**
  * List of public routes that do not require authentication.
  * If the current path ends with any of these, the user can access without being logged in.
@@ -78,17 +77,7 @@ export default function SessionGate({
    * Shows a loading spinner while the authentication state is being determined.
    */
   if (user === undefined) {
-    return (
-      <div className="flex items-center justify-center h-screen bg-white">
-        <div className="flex justify-center items-center w-screen">
-          <AiOutlineLoading3Quarters
-            role="status"
-            size={50}
-            className="animate-spin text-thistle "
-          />
-        </div>
-      </div>
-    );
+    return <LoadingSpin />;
   }
 
   /**

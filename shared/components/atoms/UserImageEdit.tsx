@@ -63,7 +63,7 @@ export default function UserImageEdit({
           className="rounded-full object-cover w-full h-full"
         />
         <span
-          className="absolute bottom-0 right-0 bg-gray-300 rounded-full p-2 shadow cursor-pointer"
+          className="absolute bottom-0 right-0 bg-thistle rounded-full p-2 shadow cursor-pointer"
           onClick={handleCameraClick}
         >
           <FaCamera />

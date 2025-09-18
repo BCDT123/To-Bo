@@ -22,7 +22,7 @@ export default function MenuModalIcon({
     <div className={`relative ${className}`}>
       <button
         type="button"
-        className="p-2 rounded-full hover:bg-gray-100"
+        className="p-2 rounded-full hover:bg-thistle/50"
         onClick={open ? onClose : onOpen}
       >
         {icon}
