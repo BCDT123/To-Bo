@@ -1,8 +1,20 @@
 {
-  "name": "Name",
-  "gender": "Gender",
-  "color": "Color",
-  "photoUrl": "Photo",
-  "birthday": "Birthday",
-  "register": "Register Baby"
+  "baby": {
+    "name": "Nombre",
+    "gender": "Género",
+    "color": "Color",
+    "photo": "Foto",
+    "birthDate": "Fecha de nacimiento",
+    "register": "Registrar bebé",
+    "male": "Masculino",
+    "female": "Femenino",
+    "babyList": "Lista de bebés",
+    "editBaby": "Editar bebé",
+    "deleteBaby": "Eliminar bebé",
+    "noBabies": "Aún no hay bebés registrados.",
+    "addBaby": "Agrega tu primer bebé",
+    "selectBaby": "Selecciona un bebé para ver detalles",
+    "old": "edad",
+    "unknownAge": "Edad desconocida"
+  }
 }

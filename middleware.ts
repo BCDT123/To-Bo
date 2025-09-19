@@ -18,6 +18,8 @@ import { supportedLocales, defaultLocale } from "@/config/locales";
  * @returns {NextResponse} The response object, either allowing the request to proceed or redirecting to the correct locale.
  */
 export function middleware(request: NextRequest) {
+  // Check for a locale cookie first
+  const cookieLocale = request.cookies.get("locale")?.value;
   // Get the Accept-Language header from the request
   const acceptLanguage = request.headers.get("accept-language") || "";
   // Parse the languages from the header
@@ -37,14 +39,23 @@ export function middleware(request: NextRequest) {
     console.log("Middleware Resolved locale:", locale);
   }
 
-  const pathname = request.nextUrl.pathname;
-  // If the pathname already includes a locale, do not redirect
-  if (supportedLocales.some((loc) => pathname.startsWith(`/${loc}`))) {
-    return NextResponse.next();
-  }
+  const response = NextResponse.next();
+  response.cookies.set("locale", locale, {
+    httpOnly: false,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "lax",
+  });
 
-  // Redirect to /[locale] if not present
-  return NextResponse.redirect(new URL(`/${locale}${pathname}`, request.url));
+  return response;
+
+  // const pathname = request.nextUrl.pathname;
+  // // If the pathname already includes a locale, do not redirect
+  // if (supportedLocales.some((loc) => pathname.startsWith(`/${loc}`))) {
+  //   return NextResponse.next();
+  // }
+
+  // // Redirect to /[locale] if not present
+  // return NextResponse.redirect(new URL(`/${locale}${pathname}`, request.url));
 }
 
 /**

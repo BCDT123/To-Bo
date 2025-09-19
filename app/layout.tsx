@@ -9,6 +9,7 @@ import NavigationWrapper from "@/shared/components/nav/NavigationWrapper";
 import SessionGate from "@/modules/auth/components/SessionGate";
 import ProfileModalConsumer from "@/modules/userSettings/hooks/ProfileModalConsumer";
 import { ProfileModalProvider } from "@/modules/userSettings/hooks/ProfileModalContext";
+import { cookies } from "next/headers";
 
 const poppins = Poppins({
   variable: "--font-poppins",
@@ -72,10 +73,14 @@ export default async function LocaleLayout({
   params: { locale: string };
 }) {
   // Loads translation messages for the current locale
-  const language = await loadLanguage(params.locale);
+  const cookieStore = await cookies();
+  const locale = cookieStore.get("locale")?.value || "en";
+  //const messages = (await import(`../messages/${locale}.json`)).default;
+  console.log("Loading locale:", locale);
+  const language = await loadLanguage(locale);
 
   return (
-    <html lang={params.locale}>
+    <html lang={locale}>
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         {/* <meta name="theme-color" content="#ffffff" /> */}
@@ -99,7 +104,7 @@ export default async function LocaleLayout({
         className={`${poppins.variable} antialiased`}
       >
         {/* Provides translation messages and locale to all components */}
-        <NextIntlClientProvider locale={params.locale} messages={language}>
+        <NextIntlClientProvider locale={locale} messages={language}>
           {/* Provides user authentication context to the app */}
           <UserProvider>
             {/* Handles automatic logout on user inactivity */}

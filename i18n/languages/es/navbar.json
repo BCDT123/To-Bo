@@ -1,12 +1,12 @@
 {
   "navbar": {
-    "home": "Home",
-    "feed": "Feed",
-    "add": "Add",
-    "alert": "Alert",
-    "user": "User",
-    "profile": "Profile",
-    "settings": "Settings",
-    "logout": "Log out"
+    "home": "Inicio",
+    "feed": "Noticias",
+    "add": "Agregar",
+    "alert": "Alerta",
+    "user": "Usuario",
+    "profile": "Perfil",
+    "settings": "Configuración",
+    "logout": "Cerrar sesión"
   }
 }
