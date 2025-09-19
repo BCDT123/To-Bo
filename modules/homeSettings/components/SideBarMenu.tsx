@@ -43,7 +43,7 @@ export default function SideBarMenu() {
   return (
     <aside
       aria-label="Settings sidebar"
-      className="fixed left-0 top-0 md:top-16 h-screen w-50 bg-white shadow-lg flex flex-col items-center py-8 z-30"
+      className="fixed left-0 top-0 md:top-16 h-screen w-50 bg-white shadow-lg flex flex-col items-center py-5 p-2 z-30"
     >
       <nav role="navigation" className="flex flex-col w-full">
         {navItems.map((item) => {

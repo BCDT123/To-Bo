@@ -1,8 +1,9 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useCallback } from "react";
 import Link from "next/link";
 import { NavItemData } from "@/shared/types/props";
 import { ButtonProps } from "@/shared/components/atoms/Button";
 import Submenu from "./Submenu";
+import { useClickOutside } from "@/shared/hooks/useClickOutside";
 
 /**
  * Props for UnifiedNavItem component.
@@ -44,9 +45,11 @@ export default function NavItem({
   showLabel,
   variant = "tertiary",
   align = "center",
-}: NavItemProps): JSX.Element {
+}: NavItemProps): React.ReactElement {
   const [open, setOpen] = useState(false);
   const drawerRef = useRef<HTMLDivElement>(null);
+
+  useClickOutside(drawerRef, () => setOpen(false), ["a"]);
 
   // Alignment classes for nav item content
   const alignments: Record<NonNullable<ButtonProps["align"]>, string> = {
@@ -70,33 +73,13 @@ export default function NavItem({
   };
 
   /**
-   * Effect: Closes the submenu if a click occurs outside the drawer.
-   */
-  useEffect(() => {
-    const handleClickOutside = (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
-      // If the click was outside the drawer and not on a link
-      if (
-        drawerRef.current &&
-        !drawerRef.current.contains(target) &&
-        !target.closest("a")
-      ) {
-        setTimeout(() => setOpen(false), 100); // delay to allow navigation
-      }
-    };
-
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
-
-  /**
    * Toggles the submenu open/close state.
    *
    * @returns {void}
    */
-  const toggleSubmenu = () => {
+  const toggleSubmenu = useCallback(() => {
     if (submenu) setOpen((prev) => !prev);
-  };
+  }, [submenu]);
 
   // Renders a simple navigation link if there is no submenu
   if (!submenu) {
@@ -129,6 +112,9 @@ export default function NavItem({
       <button
         onClick={toggleSubmenu}
         aria-label={label}
+        aria-haspopup="menu"
+        aria-expanded={open}
+        aria-controls={`submenu-${label}`}
         className={`flex flex-col items-center justify-center text-sm focus:outline-none`}
       >
         {icon}
@@ -138,16 +124,11 @@ export default function NavItem({
       </button>
 
       {open && (
-        <>
-          {/* Desktop submenu */}
-          <Submenu menu={submenu} onClick={() => setOpen(false)} />
-          {/* Mobile submenu */}
-          <Submenu
-            mobile={true}
-            menu={submenu}
-            onClick={() => setOpen(false)}
-          />
-        </>
+        <Submenu
+          // id={`submenu-${label}`}
+          menu={submenu}
+          onClick={() => setOpen(false)}
+        />
       )}
     </div>
   );

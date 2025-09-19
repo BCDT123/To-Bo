@@ -1,7 +1,7 @@
 // Modal consumer component
 "use client";
 import React from "react";
-import Modal from "@/shared/components/ModalLeft";
+import Modal from "@/shared/components/ModalRight";
 import UserProfileEdit from "@/modules/userSettings/components/UserProfileEdit";
 import { useProfileModal } from "@/modules/userSettings/hooks/ProfileModalContext";
 import Overlay from "@/shared/components/Overlay";

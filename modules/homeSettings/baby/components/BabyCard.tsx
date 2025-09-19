@@ -69,7 +69,17 @@ export default function BabyCard({
   };
 
   return (
-    <div key={key} className=" relative flex flex-col p-4 shadow-sm">
+    <div
+      key={key}
+      className="bg-apricot/20 relative flex flex-col p-4 shadow-sm"
+      style={{
+        backgroundColor: baby.color
+          ? `${baby.color.replace("#", "#")}${
+              baby.color.length === 7 ? "20" : ""
+            }` // HEX + alpha (20 = 12.5%)
+          : "rgba(255, 255, 255, 0.5)", // fallback
+      }}
+    >
       {/* Menu icon */}
       <div className="absolute top-2 right-0">
         <MenuModalIcon

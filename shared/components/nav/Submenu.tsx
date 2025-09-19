@@ -3,36 +3,40 @@ import Link from "next/link";
 import React from "react";
 import { ButtonRoundIcon } from "@/shared/components/atoms/Button";
 import { IoMdClose } from "react-icons/io";
+import Overlay from "../Overlay";
 
 /**
- * Props for Submenu and SubmenuMobile
+ * Props for Submenu component.
  * @property {NavItemData[]} menu - Array of submenu items.
  * @property {() => void} [onClick] - Optional callback when an item is clicked.
- * @property {boolean} [mobile] - If true, renders mobile styles.
  */
 interface NavBarProps {
   menu: NavItemData[];
   onClick?: () => void;
-  mobile?: boolean;
 }
 
 /**
  * Renders submenu items.
  *
- * @param {NavBarProps} props - Contains the menu array and optional onClick handler.
- * @returns {JSX.Element[]} Array of submenu link elements. block w-full text-sm
+ * @param {NavItemData[]} menu - Array of submenu items.
+ * @param {() => void} [onClick] - Optional callback when an item is clicked.
+ * @param {string} className - Additional CSS classes for styling.
+ * @returns {JSX.Element[]} Array of submenu link elements.
  */
 function renderMenuItems(
   menu: NavItemData[],
   onClick?: () => void,
   className?: string
 ) {
+  const baseLinkStyles =
+    "flex flex-row items-center font-medium hover:text-thistle px-4 py-2 rounded transition-transform duration-300 ease-in-out transform hover:scale-105 focus:outline-none";
   return menu.map((item) => (
     <Link
       key={item.label}
       href={item.href || ""}
       aria-label={item.label}
-      className={`${className} text-gray-700 font-medium hover:text-thistle px-4 py-2 rounded  transition-transform duration-300 ease-in-out transform hover:scale-105`}
+      tabIndex={0}
+      className={`${baseLinkStyles} ${className} text-gray-700`}
       onClick={() => {
         if (item.onClick) item.onClick();
         if (onClick) onClick();
@@ -46,30 +50,38 @@ function renderMenuItems(
 }
 
 /**
- * Unified Submenu component
+ * Exported Submenu component.
  *
  * Purpose:
  * - Renders a submenu for navigation items on desktop or mobile screens.
  * - Handles click events for submenu items and closes the submenu after navigation.
- * - Includes a close button for the submenu on mobile.
+ * - Includes a close button and overlay for mobile.
  *
  * Parameters:
- * @param {NavBarProps} props - Contains the menu array, optional onClick handler, and mobile flag.
+ * @param {NavBarProps} props - Contains the menu array and optional onClick handler.
  *
  * Returns:
  * @returns {JSX.Element} The submenu element for desktop or mobile.
  */
-export default function Submenu({
-  menu,
-  onClick,
-  mobile = false,
-}: NavBarProps) {
-  if (mobile) {
-    return (
+export default function Submenu({ menu, onClick }: NavBarProps) {
+  return (
+    <>
+      {/* Overlay for mobile */}
+      <Overlay onClick={onClick} />
+      {/* Desktop submenu */}
+      <div
+        className="hidden md:block absolute right-0 top-10 p-2 mt-2 bg-white shadow-lg rounded-md py-2 z-50"
+        role="menu"
+        aria-label="Submenu"
+      >
+        {renderMenuItems(menu, onClick, "text-xs")}
+      </div>
+      {/* Mobile submenu */}
       <div
         className="md:hidden fixed inset-0 bg-white z-50 flex flex-col items-center justify-center space-y-6 text-lg shadow-lg"
         role="menu"
         aria-label="Mobile Submenu"
+        aria-modal="true"
       >
         {renderMenuItems(menu, onClick, "text-lg")}
         <ButtonRoundIcon
@@ -80,16 +92,6 @@ export default function Submenu({
           <IoMdClose />
         </ButtonRoundIcon>
       </div>
-    );
-  }
-
-  return (
-    <div
-      className="hidden md:block absolute left-1/2 transform -translate-x-1/2 top-full p-2 mt-2 bg-white shadow-lg rounded-md py-2 w-48 z-50"
-      role="menu"
-      aria-label="Submenu"
-    >
-      {renderMenuItems(menu, onClick, "block w-full text-sm")}
-    </div>
+    </>
   );
 }

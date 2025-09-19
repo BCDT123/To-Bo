@@ -6,12 +6,15 @@ import { BiNews } from "react-icons/bi";
 import { FaUser, FaBell } from "react-icons/fa";
 import { RiAddBoxFill } from "react-icons/ri";
 import letterImg from "@/public/favicon/letter.png";
-
+import { IoLogOutSharp } from "react-icons/io5";
+import { IoMdSettings } from "react-icons/io";
+// Components
 import { NavItemData } from "@/shared/types/props";
 import { logout } from "@/modules/auth/services/auth";
 import { useTranslations } from "next-intl";
 import { useProfileModal } from "@/modules/userSettings/hooks/ProfileModalContext";
 import NavItem from "@/shared/components/nav/NavItem";
+
 /**
  * NavigationBar component
  *
@@ -66,9 +69,18 @@ export default function NavigationBar({ pathname }: NavBarProps) {
         {
           label: tNavbar("profile"),
           onClick: () => setShowProfile(true),
+          icon: <FaUser size={20} />,
         },
-        { label: tNavbar("settings"), href: "/user/settings" },
-        { label: tNavbar("logout"), onClick: logout },
+        {
+          label: tNavbar("settings"),
+          href: "/user/settings",
+          icon: <IoMdSettings size={20} />,
+        },
+        {
+          label: tNavbar("logout"),
+          icon: <IoLogOutSharp size={20} />,
+          onClick: logout,
+        },
       ],
     },
   ];

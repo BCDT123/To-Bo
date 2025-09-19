@@ -30,7 +30,7 @@ export default function MenuModalIcon({
       {open && (
         <>
           <Overlay onClick={onClose} />
-          <div className="absolute right-0 mt-2 w-32 bg-white rounded shadow-lg z-50">
+          <div className="absolute right-0 mt-2 bg-white rounded shadow-lg z-50">
             {children}
           </div>
         </>
