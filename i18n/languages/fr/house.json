@@ -1,0 +1,11 @@
+{
+  "house": {
+    "house": "Maison",
+    "name": "Nom",
+    "location": "Emplacement",
+    "color": "Couleur",
+    "photoUrl": "Photo",
+    "size": "Taille",
+    "register": "Enregistrer la maison"
+  }
+}
