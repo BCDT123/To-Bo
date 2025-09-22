@@ -6,4 +6,5 @@ import { babelIncludeRegexes } from "next/dist/build/webpack-config";
 export const endpoints = {
   users: "users",
   babies: "babies",
+  houses: "houses",
 };

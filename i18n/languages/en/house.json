@@ -6,6 +6,12 @@
     "color": "Color",
     "photoUrl": "Photo",
     "size": "Size",
-    "register": "Register House"
+    "register": "Register House",
+    "houseList": "House List",
+    "editHouse": "Edit House",
+    "deleteHouse": "Delete House",
+    "noHouses": "No houses registered yet.",
+    "addHouse": "Add your first house",
+    "selectHouse": "Select a house to view details"
   }
 }

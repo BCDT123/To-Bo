@@ -1,10 +1,9 @@
 {
   "profile": {
     "title": "Tu perfil",
-    "name": "Nombre completo",
-    "email": "Correo electrónico",
-    "phone": "Número de teléfono",
-    "update": "Actualizar perfil",
+    "name": "Nombre",
+    "email": "Correo",
+    "phone": "Núm. de teléfono",
     "changePassword": "Cambiar contraseña",
     "success": "Perfil actualizado correctamente",
     "error": "Ocurrió un error al actualizar el perfil",

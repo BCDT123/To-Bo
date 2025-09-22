@@ -3,10 +3,11 @@ import React from "react";
 import { Baby } from "../types/babyModel";
 import { babyService } from "@/modules/homeSettings/baby/services/babyService";
 import { useTranslations } from "next-intl";
-import BabyCard from "./BabyCard";
-import { RiAddBoxFill } from "react-icons/ri";
-import LoadingSpin from "@/shared/components/atoms/LoadingSpin";
-import Button, { ButtonRoundIcon } from "@/shared/components/atoms/Button";
+import BabyAgeLabel from "./BabyAgeLabel";
+import Card from "@/modules/homeSettings/components/Card";
+import image from "@/public/images/default-profile.png";
+import Grid from "../../components/Grid";
+
 /**
  * Props for BabyGrid component.
  *
@@ -70,36 +71,41 @@ export default function BabyGrid({
     setMenuOpen(null);
   };
 
+  /**
+   * BabyGrid component.
+   *
+   * Renders a grid layout of baby cards, including add, edit, and delete actions.
+   *
+   * @param {string} title - The grid title.
+   * @param {boolean} loading - Loading state for the grid.
+   * @param {() => void} onAdd - Callback for adding a new baby.
+   * @param {React.ReactNode} children - The baby card elements.
+   * @returns {JSX.Element} The grid section with baby cards.
+   */
   return (
-    <section>
-      {loading ? (
-        <LoadingSpin />
-      ) : (
-        <div className="w-full">
-          <div className="flex items-center mb-5 gap-2">
-            <h2 className="text-lg font-medium">{tBaby("babyList")}</h2>
-            <ButtonRoundIcon
-              aria-label="Add baby"
-              onClick={onAddBaby}
-              type="button"
-            >
-              <RiAddBoxFill size={20} />
-            </ButtonRoundIcon>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-            {babies.map((baby) => (
-              <BabyCard
-                key={baby.id}
-                baby={baby}
-                onDelete={handleDeleteBaby}
-                onEdit={handleEdit}
-                menuOpen={menuOpen}
-                setMenuOpen={setMenuOpen}
-              />
-            ))}
-          </div>
-        </div>
-      )}
-    </section>
+    <Grid title={tBaby("babyList")} loading={loading} onAdd={onAddBaby}>
+      {babies.map((baby) => (
+        <Card
+          item={baby}
+          fields={[
+            { key: "name", label: tBaby("name") },
+            {
+              key: "birthDate",
+              label: tBaby("birthDate"),
+              render: (v) => <BabyAgeLabel birthDate={v} />,
+            },
+            // ...other fields
+          ]}
+          menuOpen={menuOpen}
+          setMenuOpen={setMenuOpen}
+          onDelete={handleDeleteBaby}
+          onEdit={handleEdit}
+          getKey={(item) => item.id || item.name}
+          imageKey="photoUrl"
+          colorKey="color"
+          defaultImage={baby.photoUrl ? baby.photoUrl : image.src}
+        />
+      ))}
+    </Grid>
   );
 }
