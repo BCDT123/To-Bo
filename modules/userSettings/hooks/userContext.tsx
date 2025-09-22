@@ -5,6 +5,8 @@ import { onAuthStateChanged, User as FirebaseUser } from "firebase/auth";
 import { auth, firestore } from "@/firebaseConfig";
 import { doc, getDoc } from "firebase/firestore";
 import { User as AppUser } from "@/modules/userSettings/types/userModel";
+import {useSyncLocale} from "@/modules/userSettings/hooks/useSyncLocale";
+
 
 /**
  * Context type for user state management.
@@ -35,6 +37,8 @@ const UserContext = createContext<UserContextType | undefined>(undefined);
  */
 export const UserProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState<AppUser | null | undefined>(undefined);
+
+  useSyncLocale(user);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {

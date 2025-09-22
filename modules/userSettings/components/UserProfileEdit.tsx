@@ -30,6 +30,15 @@ export default function UserProfileEdit() {
   const setUser = useSetUser();
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
+
+  // Effect to update the success message when the language changes.
+  React.useEffect(() => {
+    if (showSuccessMessage) {
+      setSuccess(tProfile("success"));
+    }
+  }, [tProfile, showSuccessMessage]);
+
 
   /**
    * Fields definition for the dynamic form
@@ -95,8 +104,9 @@ export default function UserProfileEdit() {
         cleanData,
         imageFile
       );
-      setSuccess(tProfile("success"));
       setUser(updatedUser);
+      // setSuccess(tProfile("success"));
+      setShowSuccessMessage(true);
     } catch (err: any) {
       setError(err.message || tProfile("error") || "An error occurred.");
     }

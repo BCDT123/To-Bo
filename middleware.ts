@@ -17,25 +17,28 @@ import { supportedLocales, defaultLocale } from "@/config/locales";
  * Returns:
  * @returns {NextResponse} The response object, either allowing the request to proceed or redirecting to the correct locale.
  */
-export function middleware(request: NextRequest) {
-  // Check for a locale cookie first
-  const cookieLocale = request.cookies.get("locale")?.value;
-  // Get the Accept-Language header from the request
-  const acceptLanguage = request.headers.get("accept-language") || "";
-  // Parse the languages from the header
-  const languages = acceptLanguage
-    .split(",")
-    .map((lang) => lang.split(";")[0].trim()) // Removes ";q=..." and spaces
-    .filter(Boolean); // Removes empty strings
+export function middleware(request: NextRequest): NextResponse {
+  // Check for a locale cookie first.
+  let locale = request.cookies.get("locale")?.value;
 
-  // Extract short language codes (e.g., "en" from "en-US")
-  const shortLanguages = languages.map((lang) => lang.split("-")[0]);
-  // Match the user's language to a supported locale
-  const locale = match(shortLanguages, supportedLocales, defaultLocale);
+  // If no locale cookie is found, detect the user's language.
+  if (!locale) {
+    // Get the Accept-Language header from the request
+    const acceptLanguage = request.headers.get("accept-language") || "";
+    // Parse the languages from the header
+    const languages = acceptLanguage
+      .split(",")
+      .map((lang) => lang.split(";")[0].trim()) // Removes ";q=..." and spaces
+      .filter(Boolean); // Removes empty strings
+
+    // Extract short language codes (e.g., "en" from "en-US")
+    const shortLanguages = languages.map((lang) => lang.split("-")[0]);
+    // Match the user's language to a supported locale
+    locale = match(shortLanguages, supportedLocales, defaultLocale);
+  }
 
   // Conditional logs for development
   if (process.env.NODE_ENV === "development") {
-    console.log("Middleware Detected languages:", languages);
     console.log("Middleware Resolved locale:", locale);
   }
 
@@ -47,15 +50,6 @@ export function middleware(request: NextRequest) {
   });
 
   return response;
-
-  // const pathname = request.nextUrl.pathname;
-  // // If the pathname already includes a locale, do not redirect
-  // if (supportedLocales.some((loc) => pathname.startsWith(`/${loc}`))) {
-  //   return NextResponse.next();
-  // }
-
-  // // Redirect to /[locale] if not present
-  // return NextResponse.redirect(new URL(`/${locale}${pathname}`, request.url));
 }
 
 /**
